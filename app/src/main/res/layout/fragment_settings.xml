@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.settings.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{(int)viewModel.dominantColor}"
+        tools:context=".ui.settings.SettingsFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/tmdb_main_bg_color"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.goku.tmdb.ui.view.CircleImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/common_margin"
+                android:background="@drawable/ic_avatar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:url="@{viewModel.profile}" />
+
+            <TextView
+                android:id="@+id/tv_profile"
+                style="@style/main_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_margin"
+                android:drawablePadding="@dimen/common_margin"
+                android:padding="@dimen/common_margin"
+                android:text="@{viewModel.accountName}"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+                app:layout_constraintStart_toEndOf="@id/iv_profile"
+                app:layout_constraintTop_toTopOf="@id/iv_profile" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_sign"
+            style="@style/normal_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:onClickListener="@{viewModel.onSignInClickListener}"
+            android:paddingStart="@dimen/common_margin"
+            android:paddingEnd="@dimen/common_margin"
+            android:text="@{viewModel.btnText}"
+            android:textColor="@{viewModel.lightMutedColor}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_toolbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_watchlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@{viewModel.isDark? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClickListener="@{viewModel.onWatchListClickListener}"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/btn_sign">
+
+            <ImageView
+                android:id="@+id/iv_watchlist_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:background="@drawable/ic_bookmark_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:text="@string/watchlist"
+                android:textColor="@{viewModel.lightMutedColor}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_watchlist_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_fav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@{viewModel.isDark? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClickListener="@{viewModel.onFavouriteClickListener}"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/cl_watchlist">
+
+            <ImageView
+                android:id="@+id/iv_fav_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:background="@drawable/ic_favorite_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:text="@string/favourite"
+                android:textColor="@{viewModel.lightMutedColor}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_fav_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@{viewModel.isDark? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClickListener="@{viewModel.onRatingClickListener}"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/cl_fav">
+
+            <ImageView
+                android:id="@+id/iv_cl_rating_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:background="@drawable/ic_star_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:text="@string/rating"
+                android:textColor="@{viewModel.lightMutedColor}"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_cl_rating_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_aldult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@{viewModel.isDark? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/cl_rating">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_aldult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:checked="@={viewModel.adultSwitch}"
+                android:onCheckedChanged="@{viewModel.onAudltCheckedChangeListener}"
+                android:thumbTint="@color/theme_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:text="@string/adult_content"
+                android:textColor="@{viewModel.lightMutedColor}"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/switch_aldult"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_night"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@{viewModel.isDark? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/cl_aldult">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:checked="@={viewModel.nightSwitch}"
+                android:onCheckedChanged="@{viewModel.onNightModeCheckedChangeListener}"
+                android:thumbTint="@color/theme_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:text="@string/night_mode"
+                android:textColor="@{viewModel.lightMutedColor}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/switch_night"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@{viewModel.isDark? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClickListener="@{viewModel.onLanguageClickListener}"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/cl_night">
+
+            <TextView
+                style="@style/sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:text="@string/application_language"
+                android:textColor="@{viewModel.lightMutedColor}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:background="@{viewModel.isDark ? @drawable/ic_more_while : @drawable/ic_more_black}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

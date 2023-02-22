@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.goku.tmdb.app.Constant" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.home.ItemCategoryModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin">
+
+        <TextView
+            android:id="@+id/tv_category"
+            style="@style/main_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:text="@{viewModel.titles}"
+            android:textColor="@{viewModel.lightMutedColor}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_media_type"
+            style="@style/sub_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:text="@{viewModel.subTitles}"
+            android:textColor="@{viewModel.mutedColor}"
+            android:textSize="@dimen/small_title_size"
+            app:layout_constraintBottom_toBottomOf="@id/tv_category"
+            app:layout_constraintStart_toEndOf="@id/tv_category" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_time_switch"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="@dimen/common_margin"
+            android:background="@{viewModel.isDark ? @drawable/search_editext_bg_while : @drawable/search_editext_bg}"
+            android:visibility="@{viewModel.isShowTimeSwitch ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@id/tv_category"
+            app:layout_constraintTop_toBottomOf="@id/tv_category">
+
+            <TextView
+                android:id="@+id/btn_left"
+                style="@style/small_title_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@{viewModel.isDay ? @drawable/search_button_bg : @drawable/transparent_bg}"
+                android:gravity="center"
+                android:onClickListener="@{viewModel.onLeftClickListener}"
+                android:singleLine="true"
+                android:text="@string/today"
+                android:textColor="@{viewModel.lightMutedColor}"
+                app:layout_constraintEnd_toStartOf="@id/btn_right"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/btn_right"
+                style="@style/small_title_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@{!viewModel.isDay ? @drawable/search_button_bg : @drawable/transparent_bg}"
+                android:gravity="center"
+                android:onClickListener="@{viewModel.onRightClickListener}"
+                android:singleLine="true"
+                android:text="@string/week"
+                android:textColor="@{viewModel.lightMutedColor}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_left" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_more"
+            style="@style/content_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:clickable="true"
+            android:drawableEnd="@{viewModel.isDark ? @drawable/ic_more_while : @drawable/ic_more_black}"
+            android:focusable="true"
+            android:text="@{viewModel.count}"
+            android:textColor="@{viewModel.lightMutedColor}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_category" />
+
+        <com.goku.tmdb.ui.view.HorizontalRecyclerView
+            android:id="@+id/recyclerview_hori"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_category"
+            app:layout_constraintTop_toBottomOf="@id/cl_time_switch" />
+
+        <include
+            android:id="@+id/view_status"
+            layout="@layout/view_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewModel="@{viewModel.statusModel}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

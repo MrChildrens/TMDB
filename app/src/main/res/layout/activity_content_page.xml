@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.ContentPageViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg_color">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_height"
+                android:background="@color/navigation_color"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleTextColor="@color/content_text_color">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:background="@drawable/round_bg"
+                    android:onClickListener="@{viewModel.onBackClickListener}"
+                    android:padding="@dimen/button_padding"
+                    android:src="@drawable/ic_arrow_back" />
+
+                <TextView
+                    style="@style/main_title_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@{viewModel.title}"
+                    android:textColor="@{(int)viewModel.lightMutedColor}" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="@dimen/common_margin"
+                    android:background="@{viewModel.isGridMode ? @drawable/ic_list : @drawable/ic_grid}"
+                    android:onClickListener="@{viewModel.onGridClickListener}" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/indicator_content_page"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/indicator_height"
+                android:layout_gravity="center"
+                android:background="@color/main_bg_color" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/search_button_bg"
+                android:paddingTop="@dimen/common_margin" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_content_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

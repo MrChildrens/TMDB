@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.home.ItemMediaModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_margin"
+        android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+        android:paddingStart="@dimen/common_margin"
+        android:paddingTop="@dimen/button_padding"
+        android:paddingEnd="@dimen/common_margin"
+        android:paddingBottom="@dimen/button_padding">
+
+        <TextView
+            android:id="@+id/tv_release_type"
+            style="@style/sub_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/button_padding"
+            android:text="@{viewModel.titles}"
+            android:textColor="@{viewModel.mutedColor}"
+            app:layout_constraintBottom_toTopOf="@id/tv_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/small_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.subTitles}"
+            android:textColor="@{viewModel.lightMutedColor}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_release_type"
+            app:layout_constraintTop_toBottomOf="@id/tv_release_type" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

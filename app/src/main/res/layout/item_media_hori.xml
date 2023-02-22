@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.home.ItemMediaModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_margin"
+        android:clickable="true"
+        android:focusable="true">
+
+        <com.goku.tmdb.ui.view.RadiusImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="@dimen/category_hori_image_width"
+            android:layout_height="0dp"
+            android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:scaleType="fitXY"
+            app:cornerRadius="@dimen/media_item_radius"
+            app:layout_constraintDimensionRatio="h,16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.goku.tmdb.ui.view.PercentCircleView
+            android:id="@+id/percent_view"
+            android:layout_width="@dimen/percent_circle_width"
+            android:layout_height="@dimen/percent_circle_width"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="-25dp"
+            android:visibility="@{viewModel.isHideVote ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/iv_cover"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover"
+            app:percent="@{(float)(viewModel.voteAverages / 10)}"
+            app:textSize="@dimen/percent_circle_textsize" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/sub_title_style"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/category_vertical_title_height"
+            android:layout_marginTop="@dimen/common_margin"
+            android:maxLines="1"
+            android:text="@{viewModel.titles}"
+            android:textColor="@{viewModel.lightMutedColor}"
+            android:visibility="@{TextUtils.isEmpty(viewModel.titles) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/iv_cover"
+            app:layout_constraintStart_toStartOf="@id/iv_cover"
+            app:layout_constraintTop_toBottomOf="@id/percent_view" />
+
+        <TextView
+            style="@style/sub_title_style"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/category_vertical_title_height"
+            android:layout_marginTop="@dimen/common_margin"
+            android:text="@{viewModel.releaseDates}"
+            android:textColor="@{viewModel.mutedColor}"
+            app:layout_constraintStart_toStartOf="@id/iv_cover"
+            app:layout_constraintEnd_toEndOf="@id/iv_cover"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <!--        <include-->
+        <!--            layout="@layout/view_rating"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="@dimen/category_vertical_title_height"-->
+        <!--            android:visibility="@{viewModel.isHideVote ? View.GONE : View.VISIBLE}"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/iv_cover"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_title"-->
+        <!--            app:rating="@{viewModel.voteAverages}" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.detail.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_backdrop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="h,16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:url="@{viewModel.backdrop}" />
+
+        <com.goku.tmdb.ui.view.RadiusImageView
+            android:id="@+id/iv_poster"
+            android:layout_width="@dimen/category_vertical_image_width"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            app:cornerRadius="@dimen/media_item_radius"
+            app:layout_constraintDimensionRatio="h,2:3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_backdrop"
+            app:url="@{viewModel.poster}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_poster"
+            app:layout_constraintTop_toTopOf="@id/iv_poster">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/main_title_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:maxLines="2"
+                android:text="@{viewModel.title}"
+                android:textColor="@{(int)viewModel.lightMutedColor}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                style="@style/sub_title_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="@{viewModel.subTitles}"
+                android:textColor="@{(int)viewModel.lightMutedColor}"
+                app:layout_constraintEnd_toEndOf="@id/tv_title"
+                app:layout_constraintStart_toStartOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_smalltitle"
+                style="@style/sub_title_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.smallTitles}"
+                android:textColor="@{(int)viewModel.mutedColor}"
+                android:maxLines="2"
+                app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
+                app:layout_constraintStart_toStartOf="@id/tv_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_satisfaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:padding="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/iv_poster">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_voteCount"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.goku.tmdb.ui.view.PercentCircleView
+                    android:id="@+id/percent_view"
+                    android:layout_width="@dimen/percent_circle_width"
+                    android:layout_height="@dimen/percent_circle_width"
+                    android:layout_marginTop="@dimen/common_margin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:percent="@{(float)(viewModel.voteAverage / 10)}"
+                    app:textSize="@dimen/percent_circle_textsize" />
+
+                <TextView
+                    android:id="@+id/tv_user_rating_hint"
+                    style="@style/sub_title_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_margin"
+                    android:text="@string/user_rating"
+                    android:textColor="@{viewModel.lightMutedColor}"
+                    app:layout_constraintBottom_toBottomOf="@id/percent_view"
+                    app:layout_constraintStart_toEndOf="@id/percent_view"
+                    app:layout_constraintTop_toTopOf="@id/percent_view" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_voteCount"
+                style="@style/transparent_button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+                android:text="@{viewModel.voteCount}"
+                android:textColor="@{(int)viewModel.lightMutedColor}"
+                app:drawableStartCompat="@drawable/ic_audience_while"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/cl_rating"
+                app:layout_constraintTop_toBottomOf="@+id/cl_rating" />
+
+            <TextView
+                android:id="@+id/tv_popularity"
+                style="@style/transparent_button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+                android:text="@{viewModel.popularity.toString()}"
+                android:textColor="@{(int)viewModel.lightMutedColor}"
+                android:visibility="@{TextUtils.isEmpty(viewModel.popularity.toString()) ? View.GONE : View.VISIBLE}"
+                app:drawableStartCompat="@drawable/ic_hot"
+                app:layout_constraintBottom_toBottomOf="@id/tv_voteCount"
+                app:layout_constraintStart_toEndOf="@id/tv_voteCount"
+                app:layout_constraintTop_toTopOf="@id/tv_voteCount" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/indicator_movie_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/indicator_height"
+            android:background="@{(int)viewModel.dominantColor}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_satisfaction" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

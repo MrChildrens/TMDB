@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.goku.tmdb.app.Constant" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.ContentListViewModel" />
+
+        <variable
+            name="categoryModel"
+            type="com.goku.tmdb.ui.home.ItemCategoryModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <com.goku.tmdb.ui.view.HorizontalRecyclerView
+            android:id="@+id/recyclerview_media"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{categoryModel.statusModel.dataStatus == Constant.DATA_STATUS_COMPLETE ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_toolbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:background="@{(int)viewModel.dominantColor}"
+            android:visibility="@{viewModel.isShowToolbar ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_total"
+                style="@style/content_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:text="@{viewModel.totalStr}"
+                android:textColor="@{(int)viewModel.lightMutedColor}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_page"
+                style="@style/content_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:text="@{viewModel.pageStr}"
+                android:textColor="@{(int)viewModel.lightMutedColor}"
+                android:visibility="@{TextUtils.isEmpty(viewModel.pageStr) ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/detail_status_view_padding_top"
+            android:visibility="@{categoryModel.statusModel.dataStatus == Constant.DATA_STATUS_COMPLETE ? View.GONE : View.VISIBLE}">
+
+            <include
+                layout="@layout/view_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:viewModel="@{categoryModel.statusModel}" />
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

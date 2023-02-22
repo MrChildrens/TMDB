@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent_20_while">#33FFFFFF</color>
+    <color name="transparent_20_black">#33000000</color>
+
+    <color name="theme_color">#0AB5E1</color>
+<!--    <color name="theme_color">#88CCA4</color>-->
+    <!--    背景主背景色-->
+    <color name="main_bg_color">@color/white</color>
+    <color name="contrary_main_bg_color">@color/black</color>
+    <color name="main_transparent_color">@color/transparent_20_black</color>
+
+    <color name="navigation_color">@color/main_bg_color</color>
+    <color name="main_title_color">@color/contrary_main_bg_color</color>
+    <color name="sub_title_color">#616B74</color>
+    <color name="small_title_color">@color/contrary_main_bg_color</color>
+
+    <color name="content_text_color">@color/contrary_main_bg_color</color>
+    <color name="button_text_color">@color/contrary_main_bg_color</color>
+    <color name="clickable_button_text_color">@color/theme_color</color>
+    <color name="star_color">@color/theme_color</color>
+    <color name="tmdb_main_bg_color">#082444</color>
+
+    <color name="rating_high_light_color">#24CD7A</color>
+    <color name="rating_high_normal_color">#204529</color>
+    <color name="rating_middle_light_color">#CDCF51</color>
+    <color name="rating_middle_normal_color">#423D0F</color>
+    <color name="rating_low_light_color">#DB2360</color>
+    <color name="rating_low_normal_color">#59233D</color>
+    <color name="rating_no_color">#616262</color>
+
+</resources>

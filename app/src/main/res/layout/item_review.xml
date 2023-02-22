@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.home.ItemMediaModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_margin"
+        android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+        android:padding="@dimen/common_margin">
+
+        <com.goku.tmdb.ui.view.CircleImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="@dimen/review_avatar_size"
+            android:layout_height="@dimen/review_avatar_size"
+            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:url="@{viewModel.images}" />
+
+        <TextView
+            android:id="@+id/tv_author"
+            style="@style/sub_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:text="@{viewModel.author}"
+            android:textColor="@{(int)viewModel.lightMutedColor}"
+            app:layout_constraintStart_toEndOf="@id/iv_cover"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/transparent_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:drawableStart="@drawable/ic_rating_yellow"
+            android:text="@{viewModel.voteAverages.toString()}"
+            android:textColor="@{viewModel.lightMutedColor}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_author"
+            app:layout_constraintStart_toEndOf="@id/tv_author"
+            app:layout_constraintTop_toTopOf="@+id/tv_author" />
+
+        <TextView
+            android:id="@+id/tv_created_time"
+            style="@style/small_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:text="@{viewModel.createdTime}"
+            android:textColor="@{(int)viewModel.mutedColor}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+            app:layout_constraintStart_toStartOf="@id/tv_author" />
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/content_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:text="@{viewModel.content}"
+            android:textColor="@{(int)viewModel.lightMutedColor}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.search.SearchViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{(int)viewModel.dominantColor}">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@{(int)viewModel.dominantColor}">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_height"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleTextColor="@color/content_text_color">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/et_search"
+                        style="@style/sub_title_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/common_margin"
+                        android:background="@{viewModel.isDark ? @drawable/search_editext_bg_while : @drawable/search_editext_bg}"
+                        android:cursorVisible="true"
+                        android:hint="@string/search_hint"
+                        android:inputType="text"
+                        android:padding="@dimen/common_margin"
+                        android:text="@={viewModel.searchText}"
+                        android:textColor="@{viewModel.lightMutedColor}"
+                        android:textColorHint="@{viewModel.mutedColor}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/iv_switch_grid"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btn_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:background="@drawable/search_button_bg"
+                        android:text="@string/search"
+                        android:textColor="@{viewModel.lightMutedColor}"
+                        app:layout_constraintBottom_toBottomOf="@id/et_search"
+                        app:layout_constraintEnd_toEndOf="@id/et_search"
+                        app:layout_constraintTop_toTopOf="@id/et_search" />
+
+                    <ImageView
+                        android:id="@+id/iv_switch_grid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_margin"
+                        android:layout_marginEnd="@dimen/common_margin"
+                        android:background="@{viewModel.isGridMode ? @drawable/ic_list : @drawable/ic_grid}"
+                        android:onClickListener="@{viewModel.onGridClickListener}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/et_search"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/indicator_search"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/indicator_height"
+                android:layout_gravity="center"
+
+                android:background="@{(int)viewModel.dominantColor}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/search_button_bg"
+                android:paddingTop="@dimen/common_margin" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

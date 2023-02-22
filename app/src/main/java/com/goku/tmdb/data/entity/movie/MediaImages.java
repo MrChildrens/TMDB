@@ -1,0 +1,436 @@
+package com.goku.tmdb.data.entity.movie;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+public class MediaImages {
+
+    @SerializedName("id")
+    private Integer id;
+    @SerializedName("backdrops")
+    private List<Backdrops> backdrops;
+    @SerializedName("posters")
+    private List<Posters> posters;
+    @SerializedName("profiles")
+    private List<Profiles> profiles;
+    @SerializedName("stills")
+    private List<Stills> stills;
+    @SerializedName("logos")
+    private List<Logos> logos;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Backdrops> getBackdrops() {
+        return backdrops;
+    }
+
+    public void setBackdrops(List<Backdrops> backdrops) {
+        this.backdrops = backdrops;
+    }
+
+    public List<Posters> getPosters() {
+        return posters;
+    }
+
+    public void setPosters(List<Posters> posters) {
+        this.posters = posters;
+    }
+
+    public List<Profiles> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(List<Profiles> profiles) {
+        this.profiles = profiles;
+    }
+
+    public List<Stills> getStills() {
+        return stills;
+    }
+
+    public void setStills(List<Stills> stills) {
+        this.stills = stills;
+    }
+
+    public List<Logos> getLogos() {
+        return logos;
+    }
+
+    public void setLogos(List<Logos> logos) {
+        this.logos = logos;
+    }
+
+    public static class Backdrops {
+        @SerializedName("aspect_ratio")
+        private Double aspectRatio;
+        @SerializedName("file_path")
+        private String filePath;
+        @SerializedName("height")
+        private Integer height;
+        @SerializedName("iso_639_1")
+        private Object iso6391;
+        @SerializedName("vote_average")
+        private Double voteAverage;
+        @SerializedName("vote_count")
+        private Integer voteCount;
+        @SerializedName("width")
+        private Integer width;
+
+        public Double getAspectRatio() {
+            return aspectRatio;
+        }
+
+        public void setAspectRatio(Double aspectRatio) {
+            this.aspectRatio = aspectRatio;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public Integer getHeight() {
+            return height;
+        }
+
+        public void setHeight(Integer height) {
+            this.height = height;
+        }
+
+        public Object getIso6391() {
+            return iso6391;
+        }
+
+        public void setIso6391(Object iso6391) {
+            this.iso6391 = iso6391;
+        }
+
+        public Double getVoteAverage() {
+            return voteAverage;
+        }
+
+        public void setVoteAverage(Double voteAverage) {
+            this.voteAverage = voteAverage;
+        }
+
+        public Integer getVoteCount() {
+            return voteCount;
+        }
+
+        public void setVoteCount(Integer voteCount) {
+            this.voteCount = voteCount;
+        }
+
+        public Integer getWidth() {
+            return width;
+        }
+
+        public void setWidth(Integer width) {
+            this.width = width;
+        }
+    }
+
+    public static class Posters {
+        @SerializedName("aspect_ratio")
+        private Double aspectRatio;
+        @SerializedName("file_path")
+        private String filePath;
+        @SerializedName("height")
+        private Integer height;
+        @SerializedName("iso_639_1")
+        private String iso6391;
+        @SerializedName("vote_average")
+        private Double voteAverage;
+        @SerializedName("vote_count")
+        private Integer voteCount;
+        @SerializedName("width")
+        private Integer width;
+
+        public Double getAspectRatio() {
+            return aspectRatio;
+        }
+
+        public void setAspectRatio(Double aspectRatio) {
+            this.aspectRatio = aspectRatio;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public Integer getHeight() {
+            return height;
+        }
+
+        public void setHeight(Integer height) {
+            this.height = height;
+        }
+
+        public String getIso6391() {
+            return iso6391;
+        }
+
+        public void setIso6391(String iso6391) {
+            this.iso6391 = iso6391;
+        }
+
+        public Double getVoteAverage() {
+            return voteAverage;
+        }
+
+        public void setVoteAverage(Double voteAverage) {
+            this.voteAverage = voteAverage;
+        }
+
+        public Integer getVoteCount() {
+            return voteCount;
+        }
+
+        public void setVoteCount(Integer voteCount) {
+            this.voteCount = voteCount;
+        }
+
+        public Integer getWidth() {
+            return width;
+        }
+
+        public void setWidth(Integer width) {
+            this.width = width;
+        }
+    }
+
+    public static class Profiles {
+        @SerializedName("aspect_ratio")
+        private Double aspectRatio;
+        @SerializedName("file_path")
+        private String filePath;
+        @SerializedName("height")
+        private Integer height;
+        @SerializedName("iso_639_1")
+        private Object iso6391;
+        @SerializedName("vote_average")
+        private Double voteAverage;
+        @SerializedName("vote_count")
+        private Integer voteCount;
+        @SerializedName("width")
+        private Integer width;
+
+        public Double getAspectRatio() {
+            return aspectRatio;
+        }
+
+        public void setAspectRatio(Double aspectRatio) {
+            this.aspectRatio = aspectRatio;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public Integer getHeight() {
+            return height;
+        }
+
+        public void setHeight(Integer height) {
+            this.height = height;
+        }
+
+        public Object getIso6391() {
+            return iso6391;
+        }
+
+        public void setIso6391(Object iso6391) {
+            this.iso6391 = iso6391;
+        }
+
+        public Double getVoteAverage() {
+            return voteAverage;
+        }
+
+        public void setVoteAverage(Double voteAverage) {
+            this.voteAverage = voteAverage;
+        }
+
+        public Integer getVoteCount() {
+            return voteCount;
+        }
+
+        public void setVoteCount(Integer voteCount) {
+            this.voteCount = voteCount;
+        }
+
+        public Integer getWidth() {
+            return width;
+        }
+
+        public void setWidth(Integer width) {
+            this.width = width;
+        }
+    }
+
+    public static class Stills {
+
+        @SerializedName("aspect_ratio")
+        private Double aspectRatio;
+        @SerializedName("height")
+        private Integer height;
+        @SerializedName("iso_639_1")
+        private String iso6391;
+        @SerializedName("file_path")
+        private String filePath;
+        @SerializedName("vote_average")
+        private Double voteAverage;
+        @SerializedName("vote_count")
+        private Integer voteCount;
+        @SerializedName("width")
+        private Integer width;
+
+        public Double getAspectRatio() {
+            return aspectRatio;
+        }
+
+        public void setAspectRatio(Double aspectRatio) {
+            this.aspectRatio = aspectRatio;
+        }
+
+        public Integer getHeight() {
+            return height;
+        }
+
+        public void setHeight(Integer height) {
+            this.height = height;
+        }
+
+        public String getIso6391() {
+            return iso6391;
+        }
+
+        public void setIso6391(String iso6391) {
+            this.iso6391 = iso6391;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public Double getVoteAverage() {
+            return voteAverage;
+        }
+
+        public void setVoteAverage(Double voteAverage) {
+            this.voteAverage = voteAverage;
+        }
+
+        public Integer getVoteCount() {
+            return voteCount;
+        }
+
+        public void setVoteCount(Integer voteCount) {
+            this.voteCount = voteCount;
+        }
+
+        public Integer getWidth() {
+            return width;
+        }
+
+        public void setWidth(Integer width) {
+            this.width = width;
+        }
+    }
+
+    public static class Logos {
+
+        @SerializedName("aspect_ratio")
+        private Double aspectRatio;
+        @SerializedName("height")
+        private Integer height;
+        @SerializedName("iso_639_1")
+        private String iso6391;
+        @SerializedName("file_path")
+        private String filePath;
+        @SerializedName("vote_average")
+        private Double voteAverage;
+        @SerializedName("vote_count")
+        private Integer voteCount;
+        @SerializedName("width")
+        private Integer width;
+
+        public Double getAspectRatio() {
+            return aspectRatio;
+        }
+
+        public void setAspectRatio(Double aspectRatio) {
+            this.aspectRatio = aspectRatio;
+        }
+
+        public Integer getHeight() {
+            return height;
+        }
+
+        public void setHeight(Integer height) {
+            this.height = height;
+        }
+
+        public String getIso6391() {
+            return iso6391;
+        }
+
+        public void setIso6391(String iso6391) {
+            this.iso6391 = iso6391;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public Double getVoteAverage() {
+            return voteAverage;
+        }
+
+        public void setVoteAverage(Double voteAverage) {
+            this.voteAverage = voteAverage;
+        }
+
+        public Integer getVoteCount() {
+            return voteCount;
+        }
+
+        public void setVoteCount(Integer voteCount) {
+            this.voteCount = voteCount;
+        }
+
+        public Integer getWidth() {
+            return width;
+        }
+
+        public void setWidth(Integer width) {
+            this.width = width;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <color name="theme_color">#0AB5E1</color>
+<!--    <color name="theme_color">#88CCA4</color>-->
+    <color name="main_bg_color">@color/black</color>
+    <color name="contrary_main_bg_color">@color/white</color>
+    <color name="main_transparent_color">@color/transparent_20_while</color>
+
+    <color name="navigation_color">@color/main_bg_color</color>
+    <color name="main_title_color">@color/contrary_main_bg_color</color>
+    <color name="sub_title_color">#CAC5D1</color>
+    <color name="small_title_color">@color/contrary_main_bg_color</color>
+
+    <color name="content_text_color">@color/contrary_main_bg_color</color>
+    <color name="button_text_color">@color/contrary_main_bg_color</color>
+    <color name="clickable_button_text_color">@color/theme_color</color>
+    <color name="star_color">@color/theme_color</color>
+</resources>

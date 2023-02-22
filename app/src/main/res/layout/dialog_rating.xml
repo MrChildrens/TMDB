@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.view.RatingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rating_dialog_bg"
+        android:padding="@dimen/common_margin">
+
+        <com.goku.tmdb.ui.view.PercentCircleView
+            android:id="@+id/percent_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/common_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:percent="@{viewModel.percent}" />
+
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:max="10"
+            android:numStars="10"
+            android:onRatingChanged="@{viewModel.onRatingChangeListener}"
+            android:rating="@{viewModel.ratings}"
+            android:stepSize="0.5"
+            android:theme="@style/ratingBar_style"
+            app:layout_constraintBottom_toTopOf="@id/btn_submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/percent_view" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:background="@android:color/transparent"
+            android:onClickListener="@{viewModel.onRemoveClickListener}"
+            android:text="@string/remove"
+            android:textColor="@color/theme_color"
+            app:layout_constraintEnd_toStartOf="@id/btn_submit"
+            app:layout_constraintTop_toTopOf="@id/btn_submit" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/normal_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:onClickListener="@{viewModel.onSubmitClickListener}"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

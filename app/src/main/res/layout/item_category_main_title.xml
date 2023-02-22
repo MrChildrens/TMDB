@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.home.ItemCategoryModel" />
+    </data>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="@{TextUtils.isEmpty(viewModel.titles) ? View.GONE : View.VISIBLE}">
+
+        <TextView
+            style="@style/main_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:textColor="@{(int)viewModel.lightMutedColor}"
+            android:text="@{viewModel.titles}" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

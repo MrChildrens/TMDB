@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{(int)viewModel.dominantColor}"
+        tools:context=".ui.MainActivity">
+
+        <include
+            layout="@layout/view_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:viewModel="@{viewModel.statusModel}" />
+
+        <FrameLayout
+            android:id="@+id/fl_fragment_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/rg_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_height"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_home"
+                style="@style/bottom_menu_style"
+                android:checked="true"
+                android:drawableTop="@{viewModel.isDark ? @drawable/tab_home_selector_night : @drawable/tab_home_selector}"
+                android:text="@string/home_page"
+                android:textColor="@{viewModel.isDark ? @color/tab_color_selector_night : @color/tab_color_selector}" />
+
+            <RadioButton
+                android:id="@+id/rb_search"
+                style="@style/bottom_menu_style"
+                android:drawableTop="@{viewModel.isDark ? @drawable/tab_search_selector_night : @drawable/tab_search_selector}"
+                android:text="@string/search"
+                android:textColor="@{viewModel.isDark ? @color/tab_color_selector_night : @color/tab_color_selector}" />
+
+            <RadioButton
+                android:id="@+id/rb_settings"
+                style="@style/bottom_menu_style"
+                android:drawableTop="@{viewModel.isDark ? @drawable/tab_settings_selector_night : @drawable/tab_settings_selector}"
+                android:text="@string/settings"
+                android:textColor="@{viewModel.isDark ? @color/tab_color_selector_night : @color/tab_color_selector}" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

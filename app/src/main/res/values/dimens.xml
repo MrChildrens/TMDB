@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="common_margin">10dp</dimen>
+    <dimen name="navigation_height">60dp</dimen>
+    <dimen name="indicator_height">60dp</dimen>
+
+    <dimen name="category_hori_image_width">180dp</dimen>
+    <dimen name="category_vertical_image_width">111dp</dimen>
+    <dimen name="category_vertical_title_height">21dp</dimen>
+
+    <dimen name="media_item_radius">10dp</dimen>
+    <dimen name="people_item_width">110dp</dimen>
+    <dimen name="people_profile_width">140dp</dimen>
+    <dimen name="season_item_width">80dp</dimen>
+    <dimen name="episode_item_width">165dp</dimen>
+    <dimen name="network_item_width">100dp</dimen>
+    <dimen name="company_item_width">140dp</dimen>
+    <dimen name="hori_image_item_width">180dp</dimen>
+
+    <dimen name="toolbar_height">80dp</dimen>
+
+    <dimen name="button_padding">5dp</dimen>
+    <dimen name="button_text_size">14sp</dimen>
+    <dimen name="button_drawable_width">18dp</dimen>
+    <dimen name="button_drawable_height">13dp</dimen>
+
+    <dimen name="clickable_button_padding">15dp</dimen>
+    <dimen name="clickable_button_text_size">14sp</dimen>
+
+    <dimen name="content_text_size">14sp</dimen>
+
+    <dimen name="main_title_size">20sp</dimen>
+    <dimen name="sub_title_size">16sp</dimen>
+    <dimen name="small_title_size">12sp</dimen>
+
+    <dimen name="detail_info_title_width">170dp</dimen>
+    <dimen name="detail_status_view_padding_top">60dp</dimen>
+
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="login_et_height">50dp</dimen>
+    <dimen name="percent_circle_stroke_width">6dp</dimen>
+    <dimen name="percent_circle_width">40dp</dimen>
+    <dimen name="percent_circle_textsize">10sp</dimen>
+    <dimen name="review_avatar_size">80dp</dimen>
+
+</resources>

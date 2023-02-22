@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.home.ItemCategoryModel" />
+    </data>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="@{TextUtils.isEmpty(viewModel.content) ? View.GONE : View.VISIBLE}">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/sub_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:text="@{viewModel.titles}"
+            android:textColor="@{(int)viewModel.mutedColor}"
+            android:visibility="@{TextUtils.isEmpty(viewModel.titles) ? View.GONE : View.VISIBLE}" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/content_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:text="@{viewModel.content}"
+            android:textColor="@{(int)viewModel.lightMutedColor}"
+            android:visibility="@{TextUtils.isEmpty(viewModel.content) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

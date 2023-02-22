@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="com.goku.tmdb.app.Constant" />
+
+        <import type="com.goku.tmdb.app.PageParams" />
+
+        <variable
+            name="viewModel"
+            type="com.goku.tmdb.ui.detail.DetailViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{(int)viewModel.dominantColor}"
+        tools:context=".ui.detail.DetailActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fitsSystemWindows="true"
+            android:visibility="@{viewModel.statusModel.dataStatus == Constant.DATA_STATUS_COMPLETE ? View.VISIBLE : View.GONE}">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:collapsedTitleGravity="start|center_vertical"
+                app:collapsedTitleTextAppearance="@style/expandedTitle"
+                app:collapsedTitleTextColor="@{(int)viewModel.lightMutedColor}"
+                app:expandedTitleGravity="start|center_vertical"
+                app:expandedTitleMarginStart="130dp"
+                app:expandedTitleMarginTop="40dp"
+                app:expandedTitleTextAppearance="@style/expandedTitle"
+                app:expandedTitleTextColor="@{(int)viewModel.lightMutedColor}"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:maxLines="2"
+                app:title=" "
+                app:titleCollapseMode="scale">
+
+                <include
+                    android:id="@+id/layout_media_top"
+                    layout="@layout/layout_media_detial_top"
+                    android:visibility="@{(viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_MOIVE || viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_MOIVE_HORI || viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_TV_SHOW|| viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_TV_SHOW_HORI || viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_SEASONS)? View.VISIBLE : View.GONE}"
+                    app:viewModel="@{viewModel}" />
+
+                <include
+                    android:id="@+id/layout_people_top"
+                    layout="@layout/layout_people_detial_top"
+                    android:visibility="@{(viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_PEOPLE || viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_PEOPLE_HORI )? View.VISIBLE : View.GONE}"
+                    app:viewModel="@{viewModel}" />
+
+                <include
+                    android:id="@+id/layout_episode_top"
+                    layout="@layout/layout_episode_detial_top"
+                    android:visibility="@{(viewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_EPISODES) ? View.VISIBLE : View.GONE}"
+                    app:viewModel="@{viewModel}" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:layout_marginBottom="@dimen/indicator_height"
+                    app:layout_collapseMode="pin"
+                    app:title=" "
+                    app:titleTextColor="@{(int)viewModel.lightMutedColor}">
+
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+                        android:padding="@dimen/button_padding"
+                        android:src="@{viewModel.isDark ? @drawable/ic_arrow_back_while : @drawable/ic_arrow_back_black}" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_movie_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:fillViewport="true"
+            android:visibility="@{viewModel.statusModel.dataStatus == Constant.DATA_STATUS_COMPLETE ? View.VISIBLE : View.GONE}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <include
+            layout="@layout/view_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:viewModel="@{viewModel.statusModel}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_operate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@{(int)viewModel.dominantColor}"
+            android:padding="@dimen/common_margin"
+            android:visibility="@{!viewModel.isShowFav &amp;&amp; !viewModel.isShowBookmark ? View.GONE : View.VISIBLE}">
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/search_button_bg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:background="@{viewModel.isFav ? @drawable/ic_favorite : @drawable/ic_favorite_border}"
+                android:onClickListener="@{viewModel.onFavClickListener}"
+                android:visibility="@{viewModel.isShowFav ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_watchlist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/view_line" />
+
+            <ImageView
+                android:id="@+id/iv_watchlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:background="@{viewModel.isBookmark ? @drawable/ic_bookmark : @drawable/ic_bookmark_border}"
+                android:onClickListener="@{viewModel.onBookmarkClickListener}"
+                android:visibility="@{viewModel.isShowBookmark ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ll_rating"
+                app:layout_constraintStart_toEndOf="@id/iv_fav"
+                app:layout_constraintTop_toTopOf="@id/view_line" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_watchlist"
+                app:layout_constraintTop_toTopOf="@id/view_line">
+
+                <ImageView
+                    android:id="@+id/iv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:background="@{viewModel.isRating ? @drawable/ic_rating_yellow : @drawable/ic_rating_while}"
+                    android:onClickListener="@{viewModel.onRatingmarkClickListener}"
+                    android:visibility="@{viewModel.isShowRating ? View.VISIBLE : View.GONE}" />
+
+                <TextView
+                    style="@style/content_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/button_padding"
+                    android:text="@{viewModel.userRating.toString()}"
+                    android:textColor="@{viewModel.lightMutedColor}" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
