@@ -13,16 +13,14 @@ import androidx.databinding.ObservableField;
 
 import com.goku.tmdb.R;
 import com.goku.tmdb.app.AppManager;
-import com.goku.tmdb.app.MultiLanguageUtil;
+import com.goku.tmdb.app.Constant;
 import com.goku.tmdb.app.PageParams;
-import com.goku.tmdb.app.TmdbApplication;
 import com.goku.tmdb.app.Utils;
 import com.goku.tmdb.base.BaseContentViewModel;
 import com.goku.tmdb.data.TmdbRepository;
 import com.goku.tmdb.data.entity.authentication.Session;
 import com.goku.tmdb.ui.ContentPageActivity;
 import com.goku.tmdb.ui.LoginActivity;
-import com.goku.tmdb.ui.MainActivity;
 import com.goku.tmdb.ui.SelectLanguageActivity;
 import com.goku.tmdb.ui.TmdbEvent;
 
@@ -115,6 +113,7 @@ public class SettingsViewModel extends BaseContentViewModel {
 
     public SettingsViewModel(@NonNull Application application, TmdbRepository model) {
         super(application, model);
+        statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
     }
 
     @Override
@@ -138,22 +137,23 @@ public class SettingsViewModel extends BaseContentViewModel {
     }
 
     public void logOut() {
-        addSubscribe(mModel.loginOut()
-                .subscribe(new Consumer<>() {
-                    @Override
-                    public void accept(Session session) throws Exception {
-                        if (session.getSuccess()) {
-                            mModel.delete(mModel.getAccount());
-                            Utils.setAccount(null);
-                            Utils.setSessionId("");
-                            refresh();
-                        }
-                    }
-                }, new Consumer<>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(TAG, "[Ciel_Debug] accept: ");
-                    }
-                }));
+        statusModel.dataStatus.set(Constant.DATA_STATUS_LOADING);
+        addSubscribe(mModel.loginOut().subscribe(new Consumer<>() {
+            @Override
+            public void accept(Session session) throws Exception {
+                if (session.getSuccess()) {
+                    mModel.delete(mModel.getAccount());
+                    Utils.setAccount(null);
+                    Utils.setSessionId("");
+                    refresh();
+                }
+                statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
+            }
+        }, new Consumer<>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
+            }
+        }));
     }
 }

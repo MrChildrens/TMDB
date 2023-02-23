@@ -25,6 +25,7 @@ import com.goku.tmdb.ui.view.HorizontalRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import me.tatarka.bindingcollectionadapter2.BR;
 
@@ -87,7 +88,11 @@ public class ContentListActivity extends BaseActivity<ActivityContentListBinding
             subTitle = mItemCategoryModel.subTitles.get();
             isToday = mItemCategoryModel.isDay.get();
             if (!TextUtils.isEmpty(subTitle)) {
-                title += subTitle;
+                if (TextUtils.equals(Utils.getLanguage(), Locale.SIMPLIFIED_CHINESE.getLanguage())) {
+                    title += subTitle;
+                } else {
+                    title = title + " " + subTitle;
+                }
             }
         }
 

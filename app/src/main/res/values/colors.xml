@@ -19,7 +19,7 @@
 
     <color name="navigation_color">@color/main_bg_color</color>
     <color name="main_title_color">@color/contrary_main_bg_color</color>
-    <color name="sub_title_color">#616B74</color>
+    <color name="sub_title_color">@android:color/darker_gray</color>
     <color name="small_title_color">@color/contrary_main_bg_color</color>
 
     <color name="content_text_color">@color/contrary_main_bg_color</color>

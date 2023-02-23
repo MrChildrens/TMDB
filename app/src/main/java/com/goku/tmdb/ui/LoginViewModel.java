@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.goku.tmdb.app.AppManager;
+import com.goku.tmdb.app.Constant;
 import com.goku.tmdb.app.Utils;
 import com.goku.tmdb.base.BaseContentViewModel;
 import com.goku.tmdb.data.TmdbRepository;
@@ -41,6 +42,7 @@ public class LoginViewModel extends BaseContentViewModel {
 
     public LoginViewModel(@NonNull Application application, TmdbRepository model) {
         super(application, model);
+        statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
         if (Utils.isRemeberPassword()) {
             username.set(Utils.getUsername());
             password.set(Utils.getPassword());
@@ -48,6 +50,7 @@ public class LoginViewModel extends BaseContentViewModel {
     }
 
     private void login(String username, String password) {
+        statusModel.dataStatus.set(Constant.DATA_STATUS_LOADING);
         addSubscribe(mModel.getRequestToken().flatMap(new Function<RequestToken, Observable<RequestToken>>() {
             @Override
             public Observable<RequestToken> apply(RequestToken newToken) throws Exception {
@@ -82,7 +85,7 @@ public class LoginViewModel extends BaseContentViewModel {
                     Utils.setUsername("");
                     Utils.setPassword("");
                 }
-
+                statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
                 finish();
             }
         }, new Consumer<>() {
@@ -90,6 +93,7 @@ public class LoginViewModel extends BaseContentViewModel {
             public void accept(Throwable throwable) throws Exception {
                 Log.d(TAG, "[Ciel_Debug] accept: " + throwable);
                 Toast.makeText(AppManager.getAppManager().currentActivity(), throwable.toString(), Toast.LENGTH_SHORT).show();
+                statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
             }
         }));
     }
