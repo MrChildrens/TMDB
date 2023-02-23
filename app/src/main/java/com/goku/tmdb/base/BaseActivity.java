@@ -12,6 +12,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 
 import com.goku.tmdb.app.MultiLanguageUtil;
+import com.goku.tmdb.app.Utils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.util.Map;
@@ -25,11 +26,13 @@ public abstract class BaseActivity<T extends ViewDataBinding, VM extends BaseVie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!isNightMode()) {
+//        if (!isNightMode()) {
+        if (!Utils.isNightMode()) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏文字颜色为暗色
         } else {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
         }
+
         initViewDataBinding();
         mViewModel.getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override

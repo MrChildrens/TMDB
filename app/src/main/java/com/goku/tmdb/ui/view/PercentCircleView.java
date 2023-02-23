@@ -61,7 +61,7 @@ public class PercentCircleView extends View {
         float centerY = getPivotY();
 
 
-        mPaint.setColor(getResources().getColor(R.color.tmdb_main_bg_color));
+        mPaint.setColor(getResources().getColor(R.color.tmdb_primary_color));
         mPaint.setStyle(Paint.Style.STROKE);
 
         int outOvalStokeWidth = getResources().getDimensionPixelOffset(R.dimen.percent_circle_stroke_width);
@@ -103,7 +103,7 @@ public class PercentCircleView extends View {
 
         int innerOvalRadius = (getWidth() - outOvalStokeWidth - percentOvalStokeWidth) / 2;
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(getResources().getColor(R.color.tmdb_main_bg_color));
+        mPaint.setColor(getResources().getColor(R.color.tmdb_primary_color));
         canvas.drawCircle(getPivotX(), getPivotY(), innerOvalRadius, mPaint);
 
 

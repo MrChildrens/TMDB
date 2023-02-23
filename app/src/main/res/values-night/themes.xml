@@ -13,7 +13,7 @@
         <item name="android:windowBackground">@color/main_bg_color</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/theme_color</item>
+        <item name="colorSecondary">@color/tmdb_secondary_color</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->

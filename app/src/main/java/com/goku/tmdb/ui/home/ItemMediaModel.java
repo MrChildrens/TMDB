@@ -69,7 +69,7 @@ public class ItemMediaModel implements Serializable {
             lightMutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.black));
         } else {
             isDark = new ObservableField<>(true);
-            dominantColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.black));
+            dominantColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.tmdb_primary_color));
             mutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
             lightMutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.white));
         }

@@ -4,7 +4,7 @@
 
     <solid android:color="@color/main_transparent_color" />
     <corners android:radius="@dimen/media_item_radius" />
-    <stroke android:color="@color/theme_color"
+    <stroke android:color="@color/tmdb_secondary_color"
         android:width="1dp"/>
 
 </shape>

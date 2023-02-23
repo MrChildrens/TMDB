@@ -47,7 +47,7 @@
             android:background="@android:color/transparent"
             android:onClickListener="@{viewModel.onRemoveClickListener}"
             android:text="@string/remove"
-            android:textColor="@color/theme_color"
+            android:textColor="@color/tmdb_secondary_color"
             app:layout_constraintEnd_toStartOf="@id/btn_submit"
             app:layout_constraintTop_toTopOf="@id/btn_submit" />
 

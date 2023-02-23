@@ -18,7 +18,7 @@
     <dimen name="company_item_width">140dp</dimen>
     <dimen name="hori_image_item_width">180dp</dimen>
 
-    <dimen name="toolbar_height">80dp</dimen>
+    <dimen name="toolbar_height">60dp</dimen>
 
     <dimen name="button_padding">5dp</dimen>
     <dimen name="button_text_size">14sp</dimen>

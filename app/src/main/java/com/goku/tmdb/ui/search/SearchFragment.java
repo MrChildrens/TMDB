@@ -156,7 +156,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding, SearchVi
     private void initMagicIndicator() {
         int normalColor = mViewModel.lightMutedColor.get();
 //        int selectedColor = mViewModel.mutedColor.get();
-        int selectedColor = getResources().getColor(R.color.theme_color);
+        int selectedColor = getResources().getColor(R.color.tmdb_secondary_color);
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override

@@ -8,7 +8,9 @@
     <color name="transparent_20_while">#33FFFFFF</color>
     <color name="transparent_20_black">#33000000</color>
 
-    <color name="theme_color">#0AB5E1</color>
+    <color name="tmdb_primary_color">#0d253f</color>
+    <color name="tmdb_secondary_color">#01b4e4</color>
+    <color name="tmdb_tertiary_color">#90cea1</color>
 <!--    <color name="theme_color">#88CCA4</color>-->
     <!--    背景主背景色-->
     <color name="main_bg_color">@color/white</color>
@@ -22,9 +24,8 @@
 
     <color name="content_text_color">@color/contrary_main_bg_color</color>
     <color name="button_text_color">@color/contrary_main_bg_color</color>
-    <color name="clickable_button_text_color">@color/theme_color</color>
-    <color name="star_color">@color/theme_color</color>
-    <color name="tmdb_main_bg_color">#082444</color>
+    <color name="clickable_button_text_color">@color/tmdb_secondary_color</color>
+    <color name="star_color">@color/tmdb_secondary_color</color>
 
     <color name="rating_high_light_color">#24CD7A</color>
     <color name="rating_high_normal_color">#204529</color>

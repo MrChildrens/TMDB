@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.goku.tmdb.app.Constant" />
+
         <variable
             name="viewModel"
             type="com.goku.tmdb.ui.MainViewModel" />
@@ -39,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_height"
             android:orientation="horizontal"
+            android:visibility="@{viewModel.statusModel.dataStatus == Constant.DATA_STATUS_COMPLETE ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <RadioButton

@@ -434,7 +434,7 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
     private void initMagicIndicator() {
         int normalColor = mViewModel.lightMutedColor.get();
 //        int selectedColor = mViewModel.mutedColor.get();
-        int selectedColor = getResources().getColor(R.color.theme_color);
+        int selectedColor = getResources().getColor(R.color.tmdb_secondary_color);
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override

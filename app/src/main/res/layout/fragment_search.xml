@@ -24,7 +24,9 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height"
+                android:layout_height="wrap_content"
+                android:background="@{(int)viewModel.dominantColor}"
+                app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:titleTextColor="@color/content_text_color">
 
@@ -32,7 +34,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <EditText
+                    <include
+                        android:id="@+id/iv_tmdb_logo"
+                        layout="@layout/toobar_tmdb"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_search"
                         style="@style/sub_title_style"
                         android:layout_width="0dp"
@@ -49,7 +58,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/iv_switch_grid"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/iv_tmdb_logo" />
 
                     <Button
                         android:id="@+id/btn_search"
@@ -70,10 +79,10 @@
                         android:layout_marginEnd="@dimen/common_margin"
                         android:background="@{viewModel.isGridMode ? @drawable/ic_list : @drawable/ic_grid}"
                         android:onClickListener="@{viewModel.onGridClickListener}"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/et_search"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/et_search"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/et_search" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

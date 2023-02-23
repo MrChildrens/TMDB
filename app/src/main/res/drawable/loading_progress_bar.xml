@@ -4,7 +4,7 @@
         <shape>
             <!--设置ProgressBar进度条圆角半径-->
             <corners android:radius="8dp" />
-            <solid android:color="@color/theme_color" />
+            <solid android:color="@color/tmdb_secondary_color" />
         </shape>
     </item>
     <!--设置ProgressBar进度条颜色-->
@@ -12,7 +12,7 @@
         <clip android:clipOrientation="horizontal">
             <shape>
                 <corners android:radius="8dp" />
-                <solid android:color="@color/theme_color" />
+                <solid android:color="@color/tmdb_secondary_color" />
             </shape>
         </clip>
     </item>

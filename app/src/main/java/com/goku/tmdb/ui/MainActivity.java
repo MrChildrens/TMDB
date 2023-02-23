@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.goku.tmdb.BR;
 import com.goku.tmdb.R;
-import com.goku.tmdb.app.Constant;
+import com.goku.tmdb.app.Utils;
 import com.goku.tmdb.base.BaseActivity;
 import com.goku.tmdb.data.AppViewModelFactory;
 import com.goku.tmdb.databinding.ActivityMainBinding;
@@ -31,7 +31,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +65,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(mViewModel.dominantColor.get());
         mViewModel.getGetConfigFinish().observe(this, new Observer<>() {
             @Override
             public void onChanged(Object o) {
@@ -177,6 +177,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             if (!isNightMode()) {
+//            if (!Utils.isNightMode()) {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏文字颜色为暗色
             } else {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);

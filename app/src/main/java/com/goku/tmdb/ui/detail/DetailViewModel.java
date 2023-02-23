@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blongho.country_data.World;
 import com.goku.tmdb.R;
+import com.goku.tmdb.app.AppManager;
 import com.goku.tmdb.app.Constant;
 import com.goku.tmdb.app.PageParams;
 import com.goku.tmdb.app.ScreenUtil;
@@ -78,7 +79,7 @@ public class DetailViewModel extends BaseContentViewModel {
         @Override
         public void onClick(View v) {
             if (!Utils.isLogin()) {
-                Toast.makeText(TmdbApplication.getInstance(), R.string.login_tip, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppManager.getAppManager().currentActivity(), R.string.login_tip, Toast.LENGTH_SHORT).show();
                 return;
             }
             String mediaType = "";
@@ -96,11 +97,11 @@ public class DetailViewModel extends BaseContentViewModel {
                             Log.d(TAG, "[Ciel_Debug] accept: " + statusBean.toString());
                             if (statusBean.isSuccess()) {
                                 isFav.set(!isFav.get());
-                                Toast.makeText(TmdbApplication.getInstance(),
+                                Toast.makeText(AppManager.getAppManager().currentActivity(),
                                         Utils.getContext().getString(R.string.successful_operation),
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(TmdbApplication.getInstance(),
+                                Toast.makeText(AppManager.getAppManager().currentActivity(),
                                         Utils.getContext().getString(R.string.operation_failed),
                                         Toast.LENGTH_SHORT).show();
                             }
@@ -108,7 +109,7 @@ public class DetailViewModel extends BaseContentViewModel {
                     }, new Consumer<>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            Toast.makeText(TmdbApplication.getInstance(),
+                            Toast.makeText(AppManager.getAppManager().currentActivity(),
                                     throwable.getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -137,11 +138,11 @@ public class DetailViewModel extends BaseContentViewModel {
                             Log.d(TAG, "[Ciel_Debug] accept: " + statusBean.toString());
                             if (statusBean.isSuccess()) {
                                 isBookmark.set(!isBookmark.get());
-                                Toast.makeText(TmdbApplication.getInstance(),
+                                Toast.makeText(AppManager.getAppManager().currentActivity(),
                                         Utils.getContext().getString(R.string.successful_operation),
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(TmdbApplication.getInstance(),
+                                Toast.makeText(AppManager.getAppManager().currentActivity(),
                                         Utils.getContext().getString(R.string.operation_failed),
                                         Toast.LENGTH_SHORT).show();
                             }
@@ -149,7 +150,7 @@ public class DetailViewModel extends BaseContentViewModel {
                     }, new Consumer<>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            Toast.makeText(TmdbApplication.getInstance(),
+                            Toast.makeText(AppManager.getAppManager().currentActivity(),
                                     throwable.getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -183,13 +184,13 @@ public class DetailViewModel extends BaseContentViewModel {
             public void accept(StatusBean statusBean) throws Exception {
                 Log.d(TAG, "[Ciel_Debug] accept: " + statusBean.toString());
                 if (statusBean.isSuccess()) {
-                    Toast.makeText(TmdbApplication.getInstance(),
+                    Toast.makeText(AppManager.getAppManager().currentActivity(),
                             Utils.getContext().getString(R.string.successful_rating),
                             Toast.LENGTH_SHORT).show();
                     isRating.set(true);
                     userRating.set(rating);
                 } else {
-                    Toast.makeText(TmdbApplication.getInstance(),
+                    Toast.makeText(AppManager.getAppManager().currentActivity(),
                             Utils.getContext().getString(R.string.rating_failed),
                             Toast.LENGTH_SHORT).show();
                 }
@@ -197,7 +198,7 @@ public class DetailViewModel extends BaseContentViewModel {
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Toast.makeText(TmdbApplication.getInstance(),
+                Toast.makeText(AppManager.getAppManager().currentActivity(),
                         throwable.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
@@ -218,13 +219,13 @@ public class DetailViewModel extends BaseContentViewModel {
             public void accept(StatusBean statusBean) throws Exception {
                 Log.d(TAG, "[Ciel_Debug] accept: " + statusBean.toString());
                 if (statusBean.isSuccess()) {
-                    Toast.makeText(TmdbApplication.getInstance(),
+                    Toast.makeText(AppManager.getAppManager().currentActivity(),
                             Utils.getContext().getString(R.string.delete_rating_successfully),
                             Toast.LENGTH_SHORT).show();
                     isRating.set(false);
                     userRating.set(null);
                 } else {
-                    Toast.makeText(TmdbApplication.getInstance(),
+                    Toast.makeText(AppManager.getAppManager().currentActivity(),
                             Utils.getContext().getString(R.string.delete_rating_failed),
                             Toast.LENGTH_SHORT).show();
                 }
@@ -232,7 +233,7 @@ public class DetailViewModel extends BaseContentViewModel {
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Toast.makeText(TmdbApplication.getInstance(),
+                Toast.makeText(AppManager.getAppManager().currentActivity(),
                         throwable.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }

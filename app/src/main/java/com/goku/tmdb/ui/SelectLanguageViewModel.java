@@ -10,20 +10,23 @@ import androidx.lifecycle.MutableLiveData;
 import com.goku.tmdb.app.AppManager;
 import com.goku.tmdb.app.MultiLanguageUtil;
 import com.goku.tmdb.app.SPUtils;
-import com.goku.tmdb.app.TmdbApplication;
-import com.goku.tmdb.base.BaseViewModel;
+import com.goku.tmdb.base.BaseContentViewModel;
 import com.goku.tmdb.data.TmdbRepository;
-import com.goku.tmdb.data.entity.configuration.Languages;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class SelectLanguageViewModel extends BaseViewModel<TmdbRepository> {
+public class SelectLanguageViewModel extends BaseContentViewModel {
     private static final String TAG = "SelectLanguageViewModel";
     List<ItemSelectLanguageModel> mDatas = new ArrayList<>();
     public MutableLiveData<List<ItemSelectLanguageModel>> refresh = new MutableLiveData<>();
-
+    public View.OnClickListener onBackClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
     public View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -88,8 +91,7 @@ public class SelectLanguageViewModel extends BaseViewModel<TmdbRepository> {
         String country = SPUtils.getInstance().getString(MultiLanguageUtil.COUNTRY);
 
         ItemSelectLanguageModel itemSelectLanguageModel = new ItemSelectLanguageModel();
-        if (TextUtils.equals(language, locale.getLanguage()) &&
-                TextUtils.equals(country, locale.getCountry())) {
+        if (TextUtils.equals(language, locale.getLanguage()) && TextUtils.equals(country, locale.getCountry())) {
             itemSelectLanguageModel.isSelected.set(true);
         } else {
             itemSelectLanguageModel.isSelected.set(false);

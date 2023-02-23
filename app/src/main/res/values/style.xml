@@ -60,6 +60,7 @@
     </style>
 
     <style name="normal_button_style">
+        <item name="android:layout_height">30dp</item>
         <item name="android:textColor">@color/button_text_color</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:gravity">center</item>
@@ -91,12 +92,12 @@
     </style>
 
     <style name="loading_progressbar_style">
-        <item name="android:indeterminateTint">@color/theme_color</item>
+        <item name="android:indeterminateTint">@color/tmdb_secondary_color</item>
     </style>
     
     <style name="ratingBar_style">
 <!--        <item name="colorControlNormal">@color/theme_color</item>-->
-        <item name="colorControlActivated">@color/theme_color</item>
+        <item name="colorControlActivated">@color/tmdb_secondary_color</item>
     </style>
 
     <style name="dialog" parent="@android:style/Theme.Dialog">

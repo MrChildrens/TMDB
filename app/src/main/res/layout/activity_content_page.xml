@@ -12,18 +12,18 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_bg_color">
+        android:background="@{(int)viewModel.dominantColor}">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbarlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@{(int)viewModel.dominantColor}">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height"
-                android:background="@color/navigation_color"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:titleTextColor="@color/content_text_color">
 
@@ -59,8 +59,7 @@
                 android:id="@+id/indicator_content_page"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/indicator_height"
-                android:layout_gravity="center"
-                android:background="@color/main_bg_color" />
+                android:layout_gravity="center" />
 
             <View
                 android:layout_width="match_parent"

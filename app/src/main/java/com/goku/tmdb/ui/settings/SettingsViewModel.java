@@ -82,7 +82,7 @@ public class SettingsViewModel extends BaseContentViewModel {
             if (Utils.isLogin()) {
                 ContentPageActivity.newInstance(AppManager.getAppManager().currentActivity(), getString(R.string.watchlist), PageParams.PAGE_TYPE_WATCHLIST);
             } else {
-                Toast.makeText(TmdbApplication.getInstance(), R.string.login_tip, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppManager.getAppManager().currentActivity(), R.string.login_tip, Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -92,7 +92,7 @@ public class SettingsViewModel extends BaseContentViewModel {
             if (Utils.isLogin()) {
                 ContentPageActivity.newInstance(AppManager.getAppManager().currentActivity(), getString(R.string.favourite), PageParams.PAGE_TYPE_FAVORITE);
             } else {
-                Toast.makeText(TmdbApplication.getInstance(), R.string.login_tip, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppManager.getAppManager().currentActivity(), R.string.login_tip, Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -102,7 +102,7 @@ public class SettingsViewModel extends BaseContentViewModel {
             if (Utils.isLogin()) {
                 ContentPageActivity.newInstance(AppManager.getAppManager().currentActivity(), getString(R.string.watchlist), PageParams.PAGE_TYPE_RATING);
             } else {
-                Toast.makeText(TmdbApplication.getInstance(), R.string.login_tip, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppManager.getAppManager().currentActivity(), R.string.login_tip, Toast.LENGTH_SHORT).show();
             }
         }
     };

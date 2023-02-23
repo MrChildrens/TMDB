@@ -14,14 +14,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@{(int)viewModel.dominantColor}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
-            android:background="@color/tmdb_main_bg_color"
-            android:padding="@dimen/common_margin"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -29,22 +28,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_margin="@dimen/common_margin"
+                android:layout_marginStart="@dimen/common_margin"
+                android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
                 android:onClickListener="@{viewModel.onBackClickListener}"
                 android:padding="@dimen/button_padding"
-                android:src="@drawable/ic_arrow_back_while"
+                android:src="@{viewModel.isDark ? @drawable/ic_arrow_back_while : @drawable/ic_arrow_back_black}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/common_margin"
-                android:padding="@dimen/common_margin"
-                android:src="@drawable/ic_the_movie_database"
+            <include
+                android:id="@+id/iv_tmdb_logo"
+                layout="@layout/toobar_tmdb"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="w, 100:13"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -96,7 +92,6 @@
             android:id="@+id/login"
             style="@style/normal_button_style"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="40dp"
             android:enabled="@{TextUtils.isEmpty(viewModel.username) || TextUtils.isEmpty(viewModel.password) ? false : true}"
@@ -110,7 +105,6 @@
             android:id="@+id/btn_register"
             style="@style/normal_button_style"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/register"
             app:layout_constraintEnd_toEndOf="parent"

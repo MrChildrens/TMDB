@@ -21,11 +21,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-            android:background="@color/tmdb_main_bg_color"
-            android:padding="@dimen/common_margin"
+            android:layout_height="wrap_content"
+            android:background="@{(int)viewModel.dominantColor}"
+            android:paddingBottom="@dimen/common_margin"
             app:layout_constraintTop_toTopOf="parent">
 
+            <include
+                android:id="@+id/iv_tmdb_logo"
+                layout="@layout/toobar_tmdb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.goku.tmdb.ui.view.CircleImageView
                 android:id="@+id/iv_profile"
@@ -34,7 +40,7 @@
                 android:layout_margin="@dimen/common_margin"
                 android:background="@drawable/ic_avatar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_tmdb_logo"
                 app:url="@{viewModel.profile}" />
 
             <TextView
@@ -46,26 +52,24 @@
                 android:drawablePadding="@dimen/common_margin"
                 android:padding="@dimen/common_margin"
                 android:text="@{viewModel.accountName}"
-                android:textColor="@color/white"
+                android:textColor="@{viewModel.lightMutedColor}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_profile"
                 app:layout_constraintStart_toEndOf="@id/iv_profile"
                 app:layout_constraintTop_toTopOf="@id/iv_profile" />
+
+            <Button
+                android:id="@+id/btn_sign"
+                style="@style/normal_button_style"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:onClickListener="@{viewModel.onSignInClickListener}"
+                android:text="@{viewModel.btnText}"
+                android:textColor="@{viewModel.lightMutedColor}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_profile" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/btn_sign"
-            style="@style/normal_button_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin"
-            android:onClickListener="@{viewModel.onSignInClickListener}"
-            android:paddingStart="@dimen/common_margin"
-            android:paddingEnd="@dimen/common_margin"
-            android:text="@{viewModel.btnText}"
-            android:textColor="@{viewModel.lightMutedColor}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_watchlist"
@@ -77,7 +81,7 @@
             android:focusable="true"
             android:onClickListener="@{viewModel.onWatchListClickListener}"
             android:padding="@dimen/common_margin"
-            app:layout_constraintTop_toBottomOf="@id/btn_sign">
+            app:layout_constraintTop_toBottomOf="@id/cl_toolbar">
 
             <ImageView
                 android:id="@+id/iv_watchlist_icon"
@@ -194,7 +198,7 @@
                 android:layout_marginStart="@dimen/common_margin"
                 android:checked="@={viewModel.adultSwitch}"
                 android:onCheckedChanged="@{viewModel.onAudltCheckedChangeListener}"
-                android:thumbTint="@color/theme_color"
+                android:thumbTint="@color/tmdb_secondary_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -232,7 +236,7 @@
                 android:layout_marginStart="@dimen/common_margin"
                 android:checked="@={viewModel.nightSwitch}"
                 android:onCheckedChanged="@{viewModel.onNightModeCheckedChangeListener}"
-                android:thumbTint="@color/theme_color"
+                android:thumbTint="@color/tmdb_secondary_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

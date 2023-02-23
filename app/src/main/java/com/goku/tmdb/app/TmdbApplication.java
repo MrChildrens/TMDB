@@ -36,6 +36,8 @@ public class TmdbApplication extends Application {
         } else {
             Utils.setNightMode(false);
         }
+
+
         MultiLanguageUtil.init(this);
         World.init(this);
 
