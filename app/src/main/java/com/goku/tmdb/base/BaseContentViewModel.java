@@ -408,20 +408,20 @@ public abstract class BaseContentViewModel extends BaseViewModel<TmdbRepository>
 
         }
         if (observable != null) {
-            getPersonCombinedCredits(observable, itemCategoryModel, itemCategoryModel.refreshCategory, itemCategoryModel.statusModel.onErrorClickListener);
+            getPersonCombinedCredits(observable, itemCategoryModel);
         }
     }
 
-    private void getPersonCombinedCredits(Observable<Credits> observable, ItemCategoryModel itemCategoryModel, MutableLiveData<ItemCategoryModel> event, View.OnClickListener onErrorClickListener) {
+    private void getPersonCombinedCredits(Observable<Credits> observable, ItemCategoryModel itemCategoryModel) {
         Disposable mapDisposable = (Disposable) mMap.get(itemCategoryModel.getCategoryType());
         if (mapDisposable != null && !mapDisposable.isDisposed()) {
             mapDisposable.dispose();
         }
         Disposable disposable = observable.subscribe(new Consumer<>() {
             @Override
-            public void accept(Credits personBeans) throws Exception {
-                Log.d(TAG, "[Ciel_Debug] accept: " + personBeans.toString());
-                showPersonCombinedCredits(personBeans, itemCategoryModel);
+            public void accept(Credits credits) throws Exception {
+                Log.d(TAG, "[Ciel_Debug] accept: " + credits.toString());
+                showPersonCombinedCredits(credits, itemCategoryModel);
             }
         }, new Consumer<>() {
             @Override

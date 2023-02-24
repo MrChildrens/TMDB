@@ -28,7 +28,7 @@
             android:id="@+id/appbarlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@{(int)viewModel.dominantColor}"
             android:fitsSystemWindows="true"
             android:visibility="@{viewModel.statusModel.dataStatus == Constant.DATA_STATUS_COMPLETE ? View.VISIBLE : View.GONE}">
 

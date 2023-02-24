@@ -359,9 +359,9 @@ public class Utils {
                 mediaModel.releaseDates.set(Utils.formatDate(movie.getReleaseDate()));
                 mediaModel.voteAverages.set(Utils.formatDouble(movie.getVoteAverage()));
                 if (!TextUtils.isEmpty(movie.getReleaseDate())) {
-                    mediaModel.date.set(Utils.formatDate(movie.getReleaseDate()));
+                    mediaModel.releaseDates.set(Utils.formatDate(movie.getReleaseDate()));
                 } else {
-                    mediaModel.date.set(getString(R.string.unknow_date));
+                    mediaModel.releaseDates.set(getString(R.string.unknow_date));
                 }
                 if (!TextUtils.isEmpty(movie.getOverview())) {
                     mediaModel.overview.set(movie.getOverview());
@@ -402,9 +402,9 @@ public class Utils {
                         getApplictionContext().getConfiguration().getImages().getPosterSizes()));
                 mediaModel.voteAverages.set(Utils.formatDouble(part.getVoteAverage()));
                 if (!TextUtils.isEmpty(part.getReleaseDate())) {
-                    mediaModel.date.set(Utils.formatDate(part.getReleaseDate()));
+                    mediaModel.releaseDates.set(Utils.formatDate(part.getReleaseDate()));
                 } else {
-                    mediaModel.date.set(getString(R.string.unknow_date));
+                    mediaModel.releaseDates.set(getString(R.string.unknow_date));
                 }
                 if (!TextUtils.isEmpty(part.getOverview())) {
                     mediaModel.overview.set(part.getOverview());
@@ -450,9 +450,9 @@ public class Utils {
                 mediaModel.releaseDates.set(Utils.formatDate(tv.getFirstAirDate()));
                 mediaModel.voteAverages.set(Utils.formatDouble(tv.getVoteAverage()));
                 if (!TextUtils.isEmpty(tv.getFirstAirDate())) {
-                    mediaModel.date.set(Utils.formatDate(tv.getFirstAirDate()));
+                    mediaModel.releaseDates.set(Utils.formatDate(tv.getFirstAirDate()));
                 } else {
-                    mediaModel.date.set(getString(R.string.unknow_date));
+                    mediaModel.releaseDates.set(getString(R.string.unknow_date));
                 }
                 if (!TextUtils.isEmpty(tv.getOverview())) {
                     mediaModel.overview.set(tv.getOverview());
@@ -611,7 +611,7 @@ public class Utils {
         return mediaModels;
     }
 
-    public static List<ItemMediaModel> guestStareToMediaModel(List<GuestStars> guestStars) {
+    public static List<ItemMediaModel> guestStarToMediaModel(List<GuestStars> guestStars) {
         List<ItemMediaModel> mediaModels = new ArrayList<>();
         if (guestStars != null) {
             for (int i = 0; i < guestStars.size(); i++) {
@@ -620,6 +620,7 @@ public class Utils {
                 mediaModel.setItemType(PageParams.ITEM_TYPE_PEOPLE);
 
                 mediaModel.titles.set(stars.getName());
+                mediaModel.subTitles.set(stars.getCharacter());
                 mediaModel.images.set(Utils.appendUrl(stars.getProfilePath(),
                         getApplictionContext().getConfiguration().getImages().getProfileSizes(),
                         R.dimen.people_item_width));
@@ -656,19 +657,22 @@ public class Utils {
 
                 if (TextUtils.equals(cast.getMediaType(), "movie")) {
                     mediaModel.titles.set(cast.getTitle());
-                    if (!TextUtils.isEmpty(cast.getReleaseDate())) {
-                        mediaModel.date.set(Utils.formatDate(cast.getReleaseDate()));
-                    } else {
-                        mediaModel.date.set(getString(R.string.unknow_date));
-                    }
+//                    if (!TextUtils.isEmpty(cast.getReleaseDate())) {
+//                        mediaModel.releaseDates.set(Utils.formatDate(cast.getReleaseDate()));
+//                    } else {
+//                        mediaModel.releaseDates.set(getString(R.string.unknow_date));
+//                    }
                 }
                 if (TextUtils.equals(cast.getMediaType(), "tv")) {
                     mediaModel.titles.set(cast.getName());
-                    if (!TextUtils.isEmpty(cast.getFirstAirDate())) {
-                        mediaModel.date.set(Utils.formatDate(cast.getFirstAirDate()));
-                    } else {
-                        mediaModel.date.set(getString(R.string.unknow_date));
-                    }
+//                    if (!TextUtils.isEmpty(cast.getFirstAirDate())) {
+//                        mediaModel.releaseDates.set(Utils.formatDate(cast.getFirstAirDate()));
+//                    } else {
+//                        mediaModel.releaseDates.set(getString(R.string.unknow_date));
+//                    }
+                }
+                if (!TextUtils.isEmpty(cast.getCharacter())) {
+                    mediaModel.releaseDates.set(cast.getCharacter());
                 }
                 mediaModel.images.set(Utils.appendUrl(cast.getPosterPath(),
                         getApplictionContext().getConfiguration().getImages().getPosterSizes(),
@@ -690,8 +694,10 @@ public class Utils {
                 mediaModel.setReleaseDate(cast.getReleaseDate());
                 mediaModel.setVoteAverage(cast.getVoteAverage());
                 mediaModel.setVoteCount(cast.getVoteCount());
+                mediaModels.add(mediaModel);
             }
             List<Crew> crews = credits.getCrew();
+            Log.d(TAG, "[Ciel_Debug] personCreditsToMediaModel: crews: " + crews.size());
             for (int i = 0; i < crews.size(); i++) {
                 Crew crew = crews.get(i);
                 if (itemType == PageParams.ITEM_TYPE_MOIVE) {
@@ -708,19 +714,22 @@ public class Utils {
                 mediaModel.setItemType(itemType);
                 if (TextUtils.equals(crew.getMediaType(), "movie")) {
                     mediaModel.titles.set(crew.getTitle());
-                    if (!TextUtils.isEmpty(crew.getReleaseDate())) {
-                        mediaModel.date.set(Utils.formatDate(crew.getReleaseDate()));
-                    } else {
-                        mediaModel.date.set(getString(R.string.unknow_date));
-                    }
+//                    if (!TextUtils.isEmpty(crew.getReleaseDate())) {
+//                        mediaModel.releaseDates.set(Utils.formatDate(crew.getReleaseDate()));
+//                    } else {
+//                        mediaModel.releaseDates.set(getString(R.string.unknow_date));
+//                    }
                 }
                 if (TextUtils.equals(crew.getMediaType(), "tv")) {
                     mediaModel.titles.set(crew.getName());
-                    if (!TextUtils.isEmpty(crew.getFirstAirDate())) {
-                        mediaModel.date.set(Utils.formatDate(crew.getFirstAirDate()));
-                    } else {
-                        mediaModel.date.set(getString(R.string.unknow_date));
-                    }
+//                    if (!TextUtils.isEmpty(crew.getFirstAirDate())) {
+//                        mediaModel.releaseDates.set(Utils.formatDate(crew.getFirstAirDate()));
+//                    } else {
+//                        mediaModel.releaseDates.set(getString(R.string.unknow_date));
+//                    }
+                }
+                if (!TextUtils.isEmpty(crew.getJob())) {
+                    mediaModel.releaseDates.set(crew.getJob());
                 }
                 mediaModel.images.set(Utils.appendUrl(crew.getPosterPath(),
                         getApplictionContext().getConfiguration().getImages().getPosterSizes(),

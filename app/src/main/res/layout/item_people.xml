@@ -53,6 +53,7 @@
             android:singleLine="true"
             android:text="@{viewModel.subTitles}"
             android:visibility="@{TextUtils.isEmpty(viewModel.subTitles) ? View.GONE : View.VISIBLE}"
+            android:textColor="@{(int)viewModel.mutedColor}"
             app:layout_constraintEnd_toEndOf="@id/iv_cover"
             app:layout_constraintStart_toStartOf="@id/iv_cover"
             app:layout_constraintTop_toBottomOf="@id/tv_name" />

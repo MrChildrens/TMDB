@@ -94,14 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/indicator_height"
                 android:layout_gravity="center"
-
                 android:background="@{(int)viewModel.dominantColor}" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/search_button_bg"
-                android:paddingTop="@dimen/common_margin" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

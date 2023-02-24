@@ -1074,7 +1074,7 @@ public class DetailViewModel extends BaseContentViewModel {
             for (int i = 0; i < guestStars.size(); i++) {
                 GuestStars stars = guestStars.get(i);
                 if (stars != null) {
-                    datas = Utils.guestStareToMediaModel(guestStars);
+                    datas = Utils.guestStarToMediaModel(guestStars);
                 }
             }
         }
