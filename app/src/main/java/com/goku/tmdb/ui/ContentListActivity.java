@@ -136,6 +136,16 @@ public class ContentListActivity extends BaseActivity<ActivityContentListBinding
             @Override
             public void onChanged(Boolean isGrid) {
                 if (mViewModel.getItemCategoryModel().getCategoryType() != PageParams.CATEGORY_TYPE_PERSON_HORI) {
+
+                    int lastVisibleItemPosition = 0;
+                    if (mRecyclerContent.getLayoutManager() instanceof LinearLayoutManager) {
+                        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerContent.getLayoutManager();
+                        lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition() - mRecyclerContent.getChildCount() + 1;
+                    } else if (mRecyclerContent.getLayoutManager() instanceof GridLayoutManager) {
+                        GridLayoutManager gridLayoutManager = (GridLayoutManager) mRecyclerContent.getLayoutManager();
+                        lastVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition() - mRecyclerContent.getChildCount() + 1;
+                    }
+
                     mAdapterContent.setGridMode(isGrid);
                     if (isGrid) {
                         if (viewType == PageParams.CATEGORY_TYPE_POSTER || viewType == PageParams.CATEGORY_TYPE_BACKDROPS) {
@@ -147,6 +157,8 @@ public class ContentListActivity extends BaseActivity<ActivityContentListBinding
                         mRecyclerContent.setLayoutManager(new LinearLayoutManager(ContentListActivity.this));
                     }
                     mRecyclerContent.setAdapter(mAdapterContent);
+
+                    mRecyclerContent.scrollToPosition(lastVisibleItemPosition);
                 }
             }
         });

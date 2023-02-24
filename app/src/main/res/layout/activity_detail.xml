@@ -72,18 +72,84 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/toolbar_height"
                     android:layout_marginBottom="@dimen/indicator_height"
+                    app:contentInsetStart="0dp"
                     app:layout_collapseMode="pin"
                     app:title=" "
                     app:titleTextColor="@{(int)viewModel.lightMutedColor}">
 
-                    <ImageView
-                        android:id="@+id/iv_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
-                        android:padding="@dimen/button_padding"
-                        android:src="@{viewModel.isDark ? @drawable/ic_arrow_back_while : @drawable/ic_arrow_back_black}" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/common_margin"
+                            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+                            android:padding="@dimen/button_padding"
+                            android:src="@{viewModel.isDark ? @drawable/ic_arrow_back_while : @drawable/ic_arrow_back_black}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            style="@style/main_title_style"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_margin"
+                            android:layout_marginEnd="@dimen/common_margin"
+                            android:maxLines="2"
+                            android:textColor="@{viewModel.lightMutedColor}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_back"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/iv_watchlist"/>
+
+                        <ImageView
+                            android:id="@+id/iv_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="@dimen/common_margin"
+                            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+                            android:onClickListener="@{viewModel.onHomeClickListener}"
+                            android:padding="@dimen/button_padding"
+                            android:src="@{viewModel.isDark ? @drawable/ic_home_unselected_while : @drawable/ic_home_unselected_black}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_fav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_margin"
+                            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+                            android:onClickListener="@{viewModel.onFavClickListener}"
+                            android:padding="@dimen/button_padding"
+                            android:src="@{viewModel.isFav ? @drawable/ic_favorite : @drawable/ic_favorite_border}"
+                            android:visibility="@{viewModel.isShowFav ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/iv_home"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_watchlist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_margin"
+                            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+                            android:onClickListener="@{viewModel.onBookmarkClickListener}"
+                            android:padding="@dimen/button_padding"
+                            android:src="@{viewModel.isBookmark ? @drawable/ic_bookmark : @drawable/ic_bookmark_border}"
+                            android:visibility="@{viewModel.isShowBookmark ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/iv_fav"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.appcompat.widget.Toolbar>
 
@@ -95,7 +161,7 @@
             android:id="@+id/viewpager_movie_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="0dp"
             android:fillViewport="true"
             android:visibility="@{viewModel.statusModel.dataStatus == Constant.DATA_STATUS_COMPLETE ? View.VISIBLE : View.GONE}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -106,78 +172,6 @@
             android:layout_height="match_parent"
             android:visibility="gone"
             app:viewModel="@{viewModel.statusModel}" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_operate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@{(int)viewModel.dominantColor}"
-            android:padding="@dimen/common_margin"
-            android:visibility="@{!viewModel.isShowFav &amp;&amp; !viewModel.isShowBookmark ? View.GONE : View.VISIBLE}">
-
-            <View
-                android:id="@+id/view_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/search_button_bg"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_fav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin"
-                android:background="@{viewModel.isFav ? @drawable/ic_favorite : @drawable/ic_favorite_border}"
-                android:onClickListener="@{viewModel.onFavClickListener}"
-                android:visibility="@{viewModel.isShowFav ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/iv_watchlist"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/view_line" />
-
-            <ImageView
-                android:id="@+id/iv_watchlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin"
-                android:background="@{viewModel.isBookmark ? @drawable/ic_bookmark : @drawable/ic_bookmark_border}"
-                android:onClickListener="@{viewModel.onBookmarkClickListener}"
-                android:visibility="@{viewModel.isShowBookmark ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/ll_rating"
-                app:layout_constraintStart_toEndOf="@id/iv_fav"
-                app:layout_constraintTop_toTopOf="@id/view_line" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_watchlist"
-                app:layout_constraintTop_toTopOf="@id/view_line">
-
-                <ImageView
-                    android:id="@+id/iv_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_margin"
-                    android:background="@{viewModel.isRating ? @drawable/ic_rating_yellow : @drawable/ic_rating_while}"
-                    android:onClickListener="@{viewModel.onRatingmarkClickListener}"
-                    android:visibility="@{viewModel.isShowRating ? View.VISIBLE : View.GONE}" />
-
-                <TextView
-                    style="@style/content_text_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="@dimen/button_padding"
-                    android:text="@{viewModel.userRating.toString()}"
-                    android:textColor="@{viewModel.lightMutedColor}" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

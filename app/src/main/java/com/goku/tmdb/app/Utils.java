@@ -490,7 +490,7 @@ public class Utils {
                     if (season.getSeasonNumber() == 0) {
                         name = getString(R.string.specials);
                     } else {
-                        name = getApplictionContext().getResources().getString(R.string.season_number_format, season.getSeasonNumber());
+                        name = getContext().getString(R.string.season_number_format, season.getSeasonNumber());
                     }
                     mediaModel.titles.set(name);
 
@@ -556,8 +556,8 @@ public class Utils {
                                 getApplictionContext().getConfiguration().getImages().getBackdropSizes()));
                     }
                     mediaModel.content.set(Utils.formatSeasonName(episode.getSeasonNumber())
-                            + "●" + Utils.formatEpisodeName(episode.getEpisodeNumber())
-                            + "●" + Utils.formatDate(episode.getAirDate()));
+                            + " | " + Utils.formatEpisodeName(episode.getEpisodeNumber())
+                            + " | " + Utils.formatDate(episode.getAirDate()));
 
 
                     mediaModel.setBackdropPath(itemCategoryModel.getBackdropPath());
@@ -671,6 +671,7 @@ public class Utils {
 //                        mediaModel.releaseDates.set(getString(R.string.unknow_date));
 //                    }
                 }
+                Log.d(TAG, "[Ciel_Debug] personCreditsToMediaModel: getCharacter: " + cast.getCharacter());
                 if (!TextUtils.isEmpty(cast.getCharacter())) {
                     mediaModel.releaseDates.set(cast.getCharacter());
                 }
@@ -696,6 +697,7 @@ public class Utils {
                 mediaModel.setVoteCount(cast.getVoteCount());
                 mediaModels.add(mediaModel);
             }
+
             List<Crew> crews = credits.getCrew();
             Log.d(TAG, "[Ciel_Debug] personCreditsToMediaModel: crews: " + crews.size());
             for (int i = 0; i < crews.size(); i++) {
@@ -753,6 +755,9 @@ public class Utils {
                 mediaModel.setVoteCount(crew.getVoteCount());
                 mediaModels.add(mediaModel);
             }
+        }
+        for (int i = 0; i < mediaModels.size(); i++) {
+            Log.d(TAG, "[Ciel_Debug] personCreditsToMediaModel: " + mediaModels.get(i).releaseDates.get());
         }
         return mediaModels;
     }

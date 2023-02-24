@@ -104,7 +104,7 @@
     <string name="prompt_password">Passwort</string>
     <string name="unknow_date">Unbekanntes Datum.</string>
     <string name="specials">Besondere Folge</string>
-    <string name="season_number_format">Staffel%1$d</string>
+    <string name="season_number_format">Staffel %1$d</string>
     <string name="unknown">Unbekannt</string>
     <string name="login_tip">Bitte melden Sie sich an, um zu arbeiten!</string>
     <string name="search_hint">Suche nach Filmen, Folgen, Personen</string>

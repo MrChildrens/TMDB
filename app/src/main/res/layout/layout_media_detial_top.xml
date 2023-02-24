@@ -80,9 +80,9 @@
                 style="@style/sub_title_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
                 android:text="@{viewModel.smallTitles}"
                 android:textColor="@{(int)viewModel.mutedColor}"
-                android:maxLines="2"
                 app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
                 app:layout_constraintStart_toStartOf="@id/tv_subtitle"
                 app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
@@ -101,17 +101,15 @@
                 android:id="@+id/cl_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="@dimen/common_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_voteCount"
                 app:layout_constraintTop_toTopOf="parent">
-
 
                 <com.goku.tmdb.ui.view.PercentCircleView
                     android:id="@+id/percent_view"
                     android:layout_width="@dimen/percent_circle_width"
                     android:layout_height="@dimen/percent_circle_width"
-                    android:layout_marginTop="@dimen/common_margin"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:percent="@{(float)(viewModel.voteAverage / 10)}"
@@ -159,6 +157,22 @@
                 app:layout_constraintBottom_toBottomOf="@id/tv_voteCount"
                 app:layout_constraintStart_toEndOf="@id/tv_voteCount"
                 app:layout_constraintTop_toTopOf="@id/tv_voteCount" />
+
+            <TextView
+                style="@style/sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/percent_circle_width"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:drawableEnd="@drawable/ic_add_box"
+                android:drawablePadding="@dimen/common_margin"
+                android:gravity="center_vertical"
+                android:onClickListener="@{viewModel.onRatingmarkClickListener}"
+                android:text="@{viewModel.userRating.toString()}"
+                android:textColor="@color/tmdb_secondary_color"
+                android:visibility="@{viewModel.isShowRating ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/cl_rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cl_rating" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

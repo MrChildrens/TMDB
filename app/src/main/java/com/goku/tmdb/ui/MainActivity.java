@@ -42,13 +42,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     public static void newInstance(Context context) {
         Intent intent = new Intent();
         ((Activity) context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        Bundle bundle = new Bundle();
-        intent.putExtras(bundle);
         intent.setClass(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
-//    private ActionBar mActionBar;
 
     @Override
     public void onStart() {
@@ -176,8 +173,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            if (!isNightMode()) {
-//            if (!Utils.isNightMode()) {
+//            if (!isNightMode()) {
+            if (!Utils.isNightMode()) {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏文字颜色为暗色
             } else {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);

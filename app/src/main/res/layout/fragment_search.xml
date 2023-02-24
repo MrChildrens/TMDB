@@ -25,7 +25,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@{(int)viewModel.dominantColor}"
                 app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:titleTextColor="@color/content_text_color">
@@ -93,8 +92,7 @@
                 android:id="@+id/indicator_search"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/indicator_height"
-                android:layout_gravity="center"
-                android:background="@{(int)viewModel.dominantColor}" />
+                android:layout_gravity="center" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

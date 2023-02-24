@@ -123,6 +123,15 @@ public class AppManager {
         sActivitystack.clear();
     }
 
+    public void backFirstActivity() {
+        for (int i = 0; i < sActivitystack.size(); i++) {
+            if (null != sActivitystack.get(i) && i != 0) {
+                finishActivity(sActivitystack.get(i));
+            }
+        }
+        sActivitystack.clear();
+    }
+
     /**
      * 获取指定的Activity
      *

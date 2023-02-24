@@ -31,7 +31,7 @@ public class ItemCategoryModel implements Serializable {
     public transient ObservableField<String> images = new ObservableField<>();
     public transient ObservableField<String> count = new ObservableField<>();
     public transient ObservableField<Boolean> isShowCount = new ObservableField<>(true);
-    public ObservableField<Boolean> isDay = new ObservableField<>(true);
+    public ObservableField<Boolean> isDay = new ObservableField<>(false);
     public transient ObservableField<Boolean> isShowTimeSwitch = new ObservableField<>(false);
 
     public transient View.OnClickListener onLeftClickListener = new View.OnClickListener() {

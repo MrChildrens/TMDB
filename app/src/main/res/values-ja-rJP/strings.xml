@@ -104,7 +104,7 @@
     <string name="prompt_password">パスワード</string>
     <string name="unknow_date">日付不明。</string>
     <string name="specials">特別編</string>
-    <string name="season_number_format">シーズン%1$d</string>
+    <string name="season_number_format">シーズン %1$d</string>
     <string name="unknown">知らない</string>
     <string name="login_tip">ログインして操作してください！</string>
     <string name="search_hint">映画、エピソード、人物を検索</string>

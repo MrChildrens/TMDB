@@ -103,7 +103,7 @@
     <string name="prompt_password">Mot de passe</string>
     <string name="unknow_date">Date inconnue.</string>
     <string name="specials">Épisode spécial</string>
-    <string name="season_number_format">Saison%1$d</string>
+    <string name="season_number_format">Saison %1$d</string>
     <string name="unknown">Inconnu</string>
     <string name="login_tip">Veuillez vous connecter pour opérer !</string>
     <string name="search_hint">Rechercher des films, des épisodes, des personnes</string>

@@ -271,7 +271,8 @@ public class CategoryAdapter extends RecyclerView.Adapter {
             super(binding.getRoot());
             mBinding = binding;
 
-            RecyclerView recyclerviewHori = mBinding.recyclerviewHori;
+            HorizontalRecyclerView recyclerviewHori = mBinding.recyclerviewHori;
+            recyclerviewHori.setNestedScrollingEnabled(false);
             recyclerviewHori.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             mAdapter = new ContentListAdapter(mContext, true);
             recyclerviewHori.setAdapter(mAdapter);
@@ -317,6 +318,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
             super(binding.getRoot());
             mBinding = binding;
             RecyclerView recyclerviewList = mBinding.recyclerviewList;
+            recyclerviewList.setNestedScrollingEnabled(false);
             recyclerviewList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             mAdapter = new ContentListAdapter(mContext, true);
             recyclerviewList.setAdapter(mAdapter);
@@ -332,6 +334,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
             super(binding.getRoot());
             mBinding = binding;
             RecyclerView recyclerviewList = mBinding.recyclerviewList;
+            recyclerviewList.setNestedScrollingEnabled(false);
             recyclerviewList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             mAdapter = new ContentListAdapter(mContext, true);
             recyclerviewList.setAdapter(mAdapter);

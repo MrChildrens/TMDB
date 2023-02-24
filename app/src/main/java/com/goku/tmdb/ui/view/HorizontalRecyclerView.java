@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.goku.tmdb.app.Constant;
+
 public class HorizontalRecyclerView extends RecyclerView {
     private static final String TAG = HorizontalRecyclerView.class.getSimpleName();
     private boolean loadingMoreEnabled = true;
@@ -53,7 +55,7 @@ public class HorizontalRecyclerView extends RecyclerView {
                     Log.d(TAG, "[Ciel_Debug] onScrollStateChanged lastVisibleItemPosition: " + lastVisibleItemPosition);
                     Log.d(TAG, "[Ciel_Debug] onScrollStateChanged linearLayoutManager.getItemCount(): " + linearLayoutManager.getItemCount());
                     if (linearLayoutManager.getChildCount() > 0
-                            && lastVisibleItemPosition > linearLayoutManager.getItemCount() - 100
+                            && lastVisibleItemPosition > linearLayoutManager.getItemCount() - Constant.GIRD_LINE_COUNT
                             && linearLayoutManager.getItemCount() > linearLayoutManager.getChildCount()) {
                         if (mOnLoadingListener != null && loadingMoreEnabled) {
                             mIsLoading = true;

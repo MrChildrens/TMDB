@@ -247,8 +247,8 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                 }
 
                 int x = 0;
-                int y = (int) mViewBinding.clOperate.getHeight();
-                ratingDialog.showAtLocation(Gravity.BOTTOM, x, y);
+                int y = 0;
+                ratingDialog.showAtLocation(Gravity.CENTER, x, y);
             }
         });
         ratingViewModel.ratingSubmit.observe(this, new Observer<Float>() {
@@ -305,12 +305,12 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                 }
 
                 refreshToolbarView();
-                if (-verticalOffset == mViewBinding.appbarlayout.getHeight()
+                if (-verticalOffset >= (mViewBinding.appbarlayout.getHeight()
                         - getResources().getDimensionPixelOffset(R.dimen.indicator_height)
-                        - getResources().getDimensionPixelOffset(R.dimen.toolbar_height)) {
-                    mViewBinding.collapsing.setTitle(mViewModel.title.get());
+                        - getResources().getDimensionPixelOffset(R.dimen.toolbar_height)) * 0.5) {
+                    mViewBinding.tvTitle.setText(mViewModel.title.get());
                 } else {
-                    mViewBinding.collapsing.setTitle(" ");
+                    mViewBinding.tvTitle.setText("");
                 }
             }
         });
@@ -332,6 +332,18 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
         Drawable backBackground = mViewBinding.ivBack.getBackground();
         if (backBackground != null) {
             backBackground.setAlpha(255 - (int) (mAppbarAphla * 255));
+        }
+        Drawable homeBackground = mViewBinding.ivHome.getBackground();
+        if (homeBackground != null) {
+            homeBackground.setAlpha(255 - (int) (mAppbarAphla * 255));
+        }
+        Drawable favBackground = mViewBinding.ivFav.getBackground();
+        if (favBackground != null) {
+            favBackground.setAlpha(255 - (int) (mAppbarAphla * 255));
+        }
+        Drawable watchlistBackground = mViewBinding.ivWatchlist.getBackground();
+        if (watchlistBackground != null) {
+            watchlistBackground.setAlpha(255 - (int) (mAppbarAphla * 255));
         }
 //        Drawable barDateBackground = mViewBinding.tvBarDate.getBackground();
 //        if (barDateBackground != null) {

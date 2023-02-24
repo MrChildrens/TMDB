@@ -77,10 +77,7 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
         super.onViewCreated(view, savedInstanceState);
         initData();
         initView();
-        if (mPagePosition == 0
-                && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_MOVIE
-                && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_TV_SHOW
-                && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
+        if (mPagePosition == 0 && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_MOVIE && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_TV_SHOW && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
             //如果Fragment在ViewPager的位置是0，且Fragment不属于搜索页面
             //直接获取数据
             getDatas(mViewModel.getItemCategoryModel());
@@ -113,8 +110,7 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
                 }
                 Log.d(TAG, "[Ciel_Debug] initData: getSeasonNumber: " + mediaModel.getSeasonNumber());
             }
-            if (mCategoryType == PageParams.CATEGORY_TYPE_EPISODES
-                    || mCategoryType == PageParams.CATEGORY_TYPE_CREDITS_SEASONS_CAST) {
+            if (mCategoryType == PageParams.CATEGORY_TYPE_EPISODES || mCategoryType == PageParams.CATEGORY_TYPE_CREDITS_SEASONS_CAST) {
                 itemCategoryModel.setTvId(mediaModel.getTvId());
                 itemCategoryModel.setTvTitle(mediaModel.getTvTitle());
                 itemCategoryModel.setPosterPath(mediaModel.getPosterPath());
@@ -126,9 +122,7 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
 
         }
         //搜索页面初始不显示Loading
-        if (mCategoryType == PageParams.CATEGORY_TYPE_SEARCH_MOVIE
-                || mCategoryType == PageParams.CATEGORY_TYPE_SEARCH_TV_SHOW
-                || mCategoryType == PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
+        if (mCategoryType == PageParams.CATEGORY_TYPE_SEARCH_MOVIE || mCategoryType == PageParams.CATEGORY_TYPE_SEARCH_TV_SHOW || mCategoryType == PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
             itemCategoryModel.statusModel.dataStatus.set(Constant.DATA_STATUS_WAIT_SEARCH);
         }
 
@@ -201,8 +195,7 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
 
         //获取父Activity->DetailActivity初始化的颜色
         if (getActivity() instanceof DetailActivity) {
-            DetailViewModel detailViewModel = new ViewModelProvider(getActivity(),
-                    AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
+            DetailViewModel detailViewModel = new ViewModelProvider(getActivity(), AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
             mViewModel.dominantColor.set(detailViewModel.dominantColor.get());
             mViewModel.mutedColor.set(detailViewModel.mutedColor.get());
             mViewModel.lightMutedColor.set(detailViewModel.lightMutedColor.get());
@@ -212,8 +205,7 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
 
         //监听父Activity->ContentPageActivity点击切换表格模式按钮
         if (getActivity() instanceof ContentPageActivity) {
-            ContentPageViewModel contentPageViewModel = new ViewModelProvider(getActivity(),
-                    AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(ContentPageViewModel.class);
+            ContentPageViewModel contentPageViewModel = new ViewModelProvider(getActivity(), AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(ContentPageViewModel.class);
             contentPageViewModel.changeGridMode.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
                 @Override
                 public void onChanged(Boolean isGridMode) {
@@ -225,8 +217,7 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
         //监听父Fragment->SearchFragment点击切换表格模式按钮
         Fragment fragment = getFragmentManager().findFragmentById(R.id.fl_fragment_container);
         if (fragment instanceof SearchFragment) {
-            SearchViewModel searchViewModel = new ViewModelProvider(fragment,
-                    AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(SearchViewModel.class);
+            SearchViewModel searchViewModel = new ViewModelProvider(fragment, AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(SearchViewModel.class);
             searchViewModel.changeGridMode.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
                 @Override
                 public void onChanged(Boolean isGridMode) {
@@ -237,8 +228,16 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
     }
 
     private void changeGridMode(Boolean isGridMode) {
-        if (mCategoryType != PageParams.CATEGORY_TYPE_PERSON_HORI
-                && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
+        if (mCategoryType != PageParams.CATEGORY_TYPE_PERSON_HORI && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
+            int lastVisibleItemPosition = 0;
+            if (mRecyclerViewContentList.getLayoutManager() instanceof LinearLayoutManager) {
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerViewContentList.getLayoutManager();
+                lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition() - mRecyclerViewContentList.getChildCount() + 1;
+            } else if (mRecyclerViewContentList.getLayoutManager() instanceof GridLayoutManager) {
+                GridLayoutManager gridLayoutManager = (GridLayoutManager) mRecyclerViewContentList.getLayoutManager();
+                lastVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition() - mRecyclerViewContentList.getChildCount() + 1;
+            }
+
             mAdapterContentList.setGridMode(isGridMode);
             if (isGridMode) {
                 mRecyclerViewContentList.setLayoutManager(new GridLayoutManager(getContext(), Constant.GIRD_LINE_COUNT));
@@ -246,16 +245,15 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
                 mRecyclerViewContentList.setLayoutManager(new LinearLayoutManager(getContext()));
             }
             mRecyclerViewContentList.setAdapter(mAdapterContentList);
+
+            mRecyclerViewContentList.scrollToPosition(lastVisibleItemPosition);
         }
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (mPagePosition != 0
-                && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_MOVIE
-                && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_TV_SHOW
-                && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
+        if (mPagePosition != 0 && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_MOVIE && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_TV_SHOW && mCategoryType != PageParams.CATEGORY_TYPE_SEARCH_PERSON) {
             //如果Fragment不在ViewPager的位置0，且Fragment不属于搜索页面
             //isVisibleToUser为true的时候获取数据
             if (isVisibleToUser && !mIsReuqestFinish) {
@@ -286,11 +284,9 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
             public void onChanged(ItemCategoryModel categoryModel) {
                 mIsReuqestFinish = true;
                 if (getActivity() instanceof DetailActivity) {
-                    DetailViewModel detailViewModel = new ViewModelProvider(getActivity(),
-                            AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
+                    DetailViewModel detailViewModel = new ViewModelProvider(getActivity(), AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
                     for (int i = 0; i < categoryModel.itemDatas.get().size(); i++) {
-                        Utils.initMediaModelPalette(detailViewModel.dominantColor.get(), detailViewModel.mutedColor.get(),
-                                detailViewModel.lightMutedColor.get(), detailViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
+                        Utils.initMediaModelPalette(detailViewModel.dominantColor.get(), detailViewModel.mutedColor.get(), detailViewModel.lightMutedColor.get(), detailViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
                     }
                     itemCategoryModel.statusModel.dominantColor.set(detailViewModel.dominantColor.get());
                     itemCategoryModel.statusModel.mutedColor.set(detailViewModel.mutedColor.get());
@@ -299,20 +295,16 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
                     mViewBinding.setViewModel(mViewModel);
                 }
                 if (getActivity() instanceof ContentPageActivity) {
-                    ContentPageViewModel contentPageViewModel = new ViewModelProvider(getActivity(),
-                            AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(ContentPageViewModel.class);
+                    ContentPageViewModel contentPageViewModel = new ViewModelProvider(getActivity(), AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(ContentPageViewModel.class);
                     for (int i = 0; i < categoryModel.itemDatas.get().size(); i++) {
-                        Utils.initMediaModelPalette(contentPageViewModel.dominantColor.get(), contentPageViewModel.mutedColor.get(),
-                                contentPageViewModel.lightMutedColor.get(), contentPageViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
+                        Utils.initMediaModelPalette(contentPageViewModel.dominantColor.get(), contentPageViewModel.mutedColor.get(), contentPageViewModel.lightMutedColor.get(), contentPageViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
                     }
                 }
                 Fragment fragment = getFragmentManager().findFragmentById(R.id.fl_fragment_container);
                 if (fragment instanceof SearchFragment) {
-                    SearchViewModel searchViewModel = new ViewModelProvider(fragment,
-                            AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(SearchViewModel.class);
+                    SearchViewModel searchViewModel = new ViewModelProvider(fragment, AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(SearchViewModel.class);
                     for (int i = 0; i < categoryModel.itemDatas.get().size(); i++) {
-                        Utils.initMediaModelPalette(searchViewModel.dominantColor.get(), searchViewModel.mutedColor.get(),
-                                searchViewModel.lightMutedColor.get(), searchViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
+                        Utils.initMediaModelPalette(searchViewModel.dominantColor.get(), searchViewModel.mutedColor.get(), searchViewModel.lightMutedColor.get(), searchViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
                     }
                 }
 

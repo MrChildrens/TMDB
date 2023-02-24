@@ -39,6 +39,7 @@ import com.goku.tmdb.data.entity.person.PersonDetail;
 import com.goku.tmdb.data.entity.tv.TvDetail;
 import com.goku.tmdb.data.entity.tvepisodes.EpisodesDetail;
 import com.goku.tmdb.data.entity.tvseasons.SeasonDetail;
+import com.goku.tmdb.ui.MainActivity;
 import com.goku.tmdb.ui.home.ItemCategoryModel;
 import com.goku.tmdb.ui.home.ItemMediaModel;
 
@@ -167,6 +168,13 @@ public class DetailViewModel extends BaseContentViewModel {
                 return;
             }
             showRatingDialog.postValue(DetailViewModel.this);
+        }
+    };
+
+    public View.OnClickListener onHomeClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            MainActivity.newInstance(AppManager.getAppManager().currentActivity());
         }
     };
 
@@ -316,10 +324,10 @@ public class DetailViewModel extends BaseContentViewModel {
 
         String name = "";
         if (mediaModel.getSeasonNumber() == 0) {
-            name = mediaModel.getTvTitle() + "●" + getString(R.string.specials);
+            name = mediaModel.getTvTitle() + " | " + getString(R.string.specials);
         } else {
-            name = mediaModel.getTvTitle() + "●" +
-                    TmdbApplication.getInstance().getResources().getString(R.string.season_number_format, mediaModel.getSeasonNumber())
+            name = mediaModel.getTvTitle() + /*"●"*/" | " +
+                    AppManager.getAppManager().currentActivity().getResources().getString(R.string.season_number_format, mediaModel.getSeasonNumber())
             ;
         }
         if (!TextUtils.isEmpty(name)) {
@@ -359,8 +367,8 @@ public class DetailViewModel extends BaseContentViewModel {
     public void initEpisodeDetail(ItemMediaModel mediaModel) {
         mItemMediaModel = mediaModel;
 
-        title.set(mediaModel.getTvTitle() + "●" +
-                Utils.formatSeasonName(mediaModel.getSeasonNumber()) + "●" + Utils.formatEpisodeName(mediaModel.getEpisodeNumber()));
+        title.set(mediaModel.getTvTitle() + " | " +
+                Utils.formatSeasonName(mediaModel.getSeasonNumber()) + " | " + Utils.formatEpisodeName(mediaModel.getEpisodeNumber()));
         subTitles.set(mediaModel.getTitle());
 
         if (!TextUtils.isEmpty(mediaModel.getPosterPath())) {
@@ -532,9 +540,11 @@ public class DetailViewModel extends BaseContentViewModel {
         smallTitlesStr.append("\n");
 
         if (movieDetail.getGenres() != null) {
-            for (Genres genre : movieDetail.getGenres()) {
-                smallTitlesStr.append(genre.getName());
-                smallTitlesStr.append(",");
+            for (int i = 0; i < movieDetail.getGenres().size(); i++) {
+                smallTitlesStr.append(movieDetail.getGenres().get(i).getName());
+                if (i != movieDetail.getGenres().size() - 1) {
+                    smallTitlesStr.append(",");
+                }
             }
         }
         return smallTitlesStr;
@@ -661,9 +671,11 @@ public class DetailViewModel extends BaseContentViewModel {
         smallTitlesStr.append("\n");
 
         if (tvDetail.getGenres() != null) {
-            for (Genres genre : tvDetail.getGenres()) {
-                smallTitlesStr.append(genre.getName());
-                smallTitlesStr.append(",");
+            for (int i = 0; i < tvDetail.getGenres().size(); i++) {
+                smallTitlesStr.append(tvDetail.getGenres().get(i).getName());
+                if (i != tvDetail.getGenres().size() - 1) {
+                    smallTitlesStr.append(",");
+                }
             }
         }
         return smallTitlesStr;
