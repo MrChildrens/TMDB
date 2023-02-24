@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
@@ -23,8 +24,8 @@ import androidx.palette.graphics.Palette;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.goku.tmdb.R;
 import com.goku.tmdb.app.Constant;
 import com.goku.tmdb.app.PageParams;
@@ -137,11 +138,12 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                 return;
             }
             Glide.with(TmdbApplication.getInstance())
-                    .load(url)
                     .asBitmap()
+                    .load(url)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                             Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
                                 @Override
                                 public void onGenerated(@Nullable Palette palette) {
@@ -200,8 +202,9 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                         }
 
                         @Override
-                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                            super.onLoadFailed(e, errorDrawable);
+//                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        public void onLoadFailed(Drawable errorDrawable) {
+                            super.onLoadFailed(errorDrawable);
                             if (needInitView) {
                                 initView();
                             }

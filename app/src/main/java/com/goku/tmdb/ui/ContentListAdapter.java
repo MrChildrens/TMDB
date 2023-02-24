@@ -2,6 +2,7 @@ package com.goku.tmdb.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,13 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.goku.tmdb.R;
 import com.goku.tmdb.app.GlideUtils;
 import com.goku.tmdb.app.PageParams;
@@ -40,6 +44,10 @@ import com.goku.tmdb.databinding.ItemSeasonsBinding;
 import com.goku.tmdb.ui.detail.DetailActivity;
 import com.goku.tmdb.ui.home.ItemMediaModel;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,7 +172,7 @@ public class ContentListAdapter extends RecyclerView.Adapter {
                 imageView = mediaHoriHolder.mBinding.ivCover;
                 imageView.setImageDrawable(raduisDrawable);
                 break;
-                case PageParams.ITEM_TYPE_POSTERS:
+            case PageParams.ITEM_TYPE_POSTERS:
                 mediaHolder = (MediaHolder) holder;
                 mediaHolder.mBinding.setVariable(BR.viewModel, model);
                 imageView = mediaHolder.mBinding.ivCover;
@@ -262,7 +270,6 @@ public class ContentListAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "[Ciel_Debug] onClick: " + model.getItemType());
                 switch (model.getItemType()) {
                     case PageParams.ITEM_TYPE_MOIVE:
                     case PageParams.ITEM_TYPE_RECOMMENDATIONS:
@@ -312,29 +319,74 @@ public class ContentListAdapter extends RecyclerView.Adapter {
     private void loadImage(ImageView imageView, int position, ItemMediaModel model) {
         String url = model.images.get();
         imageView.setTag(R.id.image_url, url);
-//        if (true) {
-        if (position < 3) {
-            GlideUtils.getInstance().add(model.images.get(), imageView);
-        } else {
-            Glide.with(imageView.getContext())
-                    .load(model.images.get())
-                    .asBitmap()
-//                    .skipMemoryCache(true)
-//                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                            Log.d(TAG, "[Ciel_Debug] onResourceReady: ");
-                            if (TextUtils.equals(String.valueOf(imageView.getTag(R.id.image_url)), url)) {
-                                imageView.setImageBitmap(resource);
-                            } else {
-                                Log.d(TAG, "[Ciel_Debug] onResourceReady: Tag 不相同");
+        if (true) {
+            if (position < 3) {
+                GlideUtils.getInstance().add(model.images.get(), model.thumbnail.get(), imageView);
+            } else {
+                Glide.with(mContext)
+                        .asFile()
+                        .load(model.images.get())
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .thumbnail(new RequestBuilder[]{Glide.with(mContext).asFile().load(model.thumbnail.get())})
+                        .into(new SimpleTarget<File>() {
+                            @Override
+                            public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+                                Log.d(TAG, "[Ciel_Debug] onResourceReady: " + position + " : " + model.titles.get() + " , " + md5(resource));
+                                Bitmap bitmap = BitmapFactory.decodeFile(resource.getPath());
+                                if (TextUtils.equals(String.valueOf(imageView.getTag(R.id.image_url)), url)) {
+                                    imageView.setImageBitmap(bitmap);
+                                } else {
+                                    Log.d(TAG, "[Ciel_Debug] onResourceReady: Tag 不相同");
+                                }
                             }
-                        }
-                    });
+
+                            @Override
+                            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                                super.onLoadFailed(errorDrawable);
+                                Log.d(TAG, "[Ciel_Debug] onLoadFailed: ");
+                            }
+                        });
+            }
         }
     }
 
+    public static String md5(File file) {
+        if (file == null || !file.isFile() || !file.exists()) {
+            return "";
+        }
+        FileInputStream in = null;
+        String result = "";
+        byte buffer[] = new byte[8192];
+        int len;
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            in = new FileInputStream(file);
+            while ((len = in.read(buffer)) != -1) {
+                md5.update(buffer, 0, len);
+            }
+            byte[] bytes = md5.digest();
+
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result += temp;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != in) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
 
     @Override
     public int getItemCount() {
@@ -501,31 +553,31 @@ public class ContentListAdapter extends RecyclerView.Adapter {
         setDatas(datas, RecyclerView.NO_POSITION);
     }
 
-    @Override
-    public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
-        super.onViewRecycled(holder);
-        ImageView imageView = null;
-        if (holder instanceof MediaHolder) {
-            imageView = ((MediaHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof MediaSingleHolder) {
-            imageView = ((MediaSingleHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof ImageHoriHolder) {
-            imageView = ((ImageHoriHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof PeopleHolder) {
-            imageView = ((PeopleHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof PeopleHoriHolder) {
-            imageView = ((PeopleHoriHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof SeasonsHolder) {
-            imageView = ((SeasonsHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof EpisodesHolder) {
-            imageView = ((EpisodesHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof NetworkInfoHolder) {
-            imageView = ((NetworkInfoHolder) holder).mBinding.ivCover;
-        } else if (holder instanceof CompanyHolder) {
-            imageView = ((CompanyHolder) holder).mBinding.ivCover;
-        }
-        if (imageView != null) {
-            Glide.clear(imageView);
-        }
-    }
+//    @Override
+//    public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+//        super.onViewRecycled(holder);
+//        ImageView imageView = null;
+//        if (holder instanceof MediaHolder) {
+//            imageView = ((MediaHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof MediaSingleHolder) {
+//            imageView = ((MediaSingleHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof ImageHoriHolder) {
+//            imageView = ((ImageHoriHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof PeopleHolder) {
+//            imageView = ((PeopleHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof PeopleHoriHolder) {
+//            imageView = ((PeopleHoriHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof SeasonsHolder) {
+//            imageView = ((SeasonsHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof EpisodesHolder) {
+//            imageView = ((EpisodesHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof NetworkInfoHolder) {
+//            imageView = ((NetworkInfoHolder) holder).mBinding.ivCover;
+//        } else if (holder instanceof CompanyHolder) {
+//            imageView = ((CompanyHolder) holder).mBinding.ivCover;
+//        }
+//        if (imageView != null) {
+//            Glide.clear(imageView);
+//        }
+//    }
 }

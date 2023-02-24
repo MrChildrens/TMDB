@@ -21,8 +21,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.palette.graphics.Palette;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.goku.tmdb.R;
 import com.goku.tmdb.app.Constant;
 import com.goku.tmdb.app.TmdbApplication;
@@ -97,11 +97,12 @@ public class ImageFragment extends BaseFragment<FragmentImageBinding, ImageViewM
                 url = mViewModel.getUrl();
             }
             Glide.with(getContext())
-                    .load(url)
                     .asBitmap()
+                    .load(url)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                             String tag = (String) mImageView.getTag(R.id.image_url);
                             if (!TextUtils.equals(tag, mViewModel.getUrl())) {
                                 return;
@@ -157,8 +158,8 @@ public class ImageFragment extends BaseFragment<FragmentImageBinding, ImageViewM
                         }
 
                         @Override
-                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                            super.onLoadFailed(e, errorDrawable);
+                        public void onLoadFailed(Drawable errorDrawable) {
+                            super.onLoadFailed(errorDrawable);
                         }
                     });
         }

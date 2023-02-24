@@ -17,7 +17,6 @@ public class ViewAdapter {
 //        if (!TextUtils.isEmpty(url)) {
             Glide.with(imageView.getContext())
                     .load(url)
-                    .asBitmap()
                     .into(imageView);
 //        } else {
 //            Glide.with(imageView.getContext())

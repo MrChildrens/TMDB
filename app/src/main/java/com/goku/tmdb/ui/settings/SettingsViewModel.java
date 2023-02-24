@@ -98,7 +98,7 @@ public class SettingsViewModel extends BaseContentViewModel {
         @Override
         public void onClick(View v) {
             if (Utils.isLogin()) {
-                ContentPageActivity.newInstance(AppManager.getAppManager().currentActivity(), getString(R.string.watchlist), PageParams.PAGE_TYPE_RATING);
+                ContentPageActivity.newInstance(AppManager.getAppManager().currentActivity(), getString(R.string.rating), PageParams.PAGE_TYPE_RATING);
             } else {
                 Toast.makeText(AppManager.getAppManager().currentActivity(), R.string.login_tip, Toast.LENGTH_SHORT).show();
             }

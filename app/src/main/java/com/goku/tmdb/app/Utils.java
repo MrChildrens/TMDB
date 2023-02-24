@@ -264,6 +264,14 @@ public class Utils {
         return url.toString();
     }
 
+    public static String appendThumbnail(String path, List<String> imageSizes) {
+        StringBuilder url = new StringBuilder(getApplictionContext().getConfiguration().getImages().getBaseUrl());
+        url.append(imageSizes.get(0))
+                .append(path);
+        Log.d(TAG, "[Ciel_Debug] appendThumbnail: " + url);
+        return url.toString();
+    }
+
     public static int intTointByte(int args) {
 
         int hex_all = 0;
@@ -343,6 +351,8 @@ public class Utils {
                     mediaModel.images.set(Utils.appendUrl(movie.getPosterPath(),
                             getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                             R.dimen.category_vertical_image_width));
+                    mediaModel.thumbnail.set(Utils.appendThumbnail(movie.getPosterPath(),
+                            getApplictionContext().getConfiguration().getImages().getPosterSizes()));
                 }
 
                 mediaModel.titles.set(movie.getTitle());
@@ -388,6 +398,8 @@ public class Utils {
                 mediaModel.images.set(Utils.appendUrl(part.getPosterPath(),
                         getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                         R.dimen.category_vertical_image_width));
+                mediaModel.thumbnail.set(Utils.appendThumbnail(part.getPosterPath(),
+                        getApplictionContext().getConfiguration().getImages().getPosterSizes()));
                 mediaModel.voteAverages.set(Utils.formatDouble(part.getVoteAverage()));
                 if (!TextUtils.isEmpty(part.getReleaseDate())) {
                     mediaModel.date.set(Utils.formatDate(part.getReleaseDate()));
@@ -433,6 +445,8 @@ public class Utils {
                 mediaModel.images.set(Utils.appendUrl(tv.getPosterPath(),
                         getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                         R.dimen.category_vertical_image_width));
+                mediaModel.thumbnail.set(Utils.appendThumbnail(tv.getPosterPath(),
+                        getApplictionContext().getConfiguration().getImages().getPosterSizes()));
                 mediaModel.releaseDates.set(Utils.formatDate(tv.getFirstAirDate()));
                 mediaModel.voteAverages.set(Utils.formatDouble(tv.getVoteAverage()));
                 if (!TextUtils.isEmpty(tv.getFirstAirDate())) {
@@ -484,10 +498,14 @@ public class Utils {
                         mediaModel.images.set(Utils.appendUrl(season.getPosterPath(),
                                 getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                                 R.dimen.season_item_width));
+                        mediaModel.thumbnail.set(Utils.appendThumbnail(season.getPosterPath(),
+                                getApplictionContext().getConfiguration().getImages().getPosterSizes()));
                     } else {
                         mediaModel.images.set(Utils.appendUrl(itemCategoryModel.getPosterPath(),
                                 getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                                 R.dimen.season_item_width));
+                        mediaModel.thumbnail.set(Utils.appendThumbnail(itemCategoryModel.getPosterPath(),
+                                getApplictionContext().getConfiguration().getImages().getPosterSizes()));
                     }
 
                     mediaModel.airDate.set(season.getAirDate());
@@ -528,10 +546,14 @@ public class Utils {
                         mediaModel.images.set(Utils.appendUrl(episode.getStillPath(),
                                 getApplictionContext().getConfiguration().getImages().getStillSizes(),
                                 R.dimen.episode_item_width));
+                        mediaModel.thumbnail.set(Utils.appendThumbnail(episode.getStillPath(),
+                                getApplictionContext().getConfiguration().getImages().getStillSizes()));
                     } else {
                         mediaModel.images.set(Utils.appendUrl(itemCategoryModel.getBackdropPath(),
                                 getApplictionContext().getConfiguration().getImages().getBackdropSizes(),
                                 R.dimen.episode_item_width));
+                        mediaModel.thumbnail.set(Utils.appendThumbnail(itemCategoryModel.getBackdropPath(),
+                                getApplictionContext().getConfiguration().getImages().getBackdropSizes()));
                     }
                     mediaModel.content.set(Utils.formatSeasonName(episode.getSeasonNumber())
                             + "●" + Utils.formatEpisodeName(episode.getEpisodeNumber())
@@ -577,6 +599,8 @@ public class Utils {
                 mediaModel.images.set(Utils.appendUrl(person.getProfilePath(),
                         getApplictionContext().getConfiguration().getImages().getProfileSizes(),
                         R.dimen.people_item_width));
+                mediaModel.thumbnail.set(Utils.appendThumbnail(person.getProfilePath(),
+                        getApplictionContext().getConfiguration().getImages().getProfileSizes()));
 
                 mediaModel.setId(person.getId());
                 mediaModel.setTitle(person.getName());
@@ -599,6 +623,8 @@ public class Utils {
                 mediaModel.images.set(Utils.appendUrl(stars.getProfilePath(),
                         getApplictionContext().getConfiguration().getImages().getProfileSizes(),
                         R.dimen.people_item_width));
+                mediaModel.thumbnail.set(Utils.appendThumbnail(stars.getProfilePath(),
+                        getApplictionContext().getConfiguration().getImages().getProfileSizes()));
 
                 mediaModel.setId(stars.getId());
                 mediaModel.setTitle(stars.getName());
@@ -647,6 +673,8 @@ public class Utils {
                 mediaModel.images.set(Utils.appendUrl(cast.getPosterPath(),
                         getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                         R.dimen.category_vertical_image_width));
+                mediaModel.thumbnail.set(Utils.appendThumbnail(cast.getPosterPath(),
+                        getApplictionContext().getConfiguration().getImages().getPosterSizes()));
 
                 if (!TextUtils.isEmpty(cast.getOverview())) {
                     mediaModel.overview.set(cast.getOverview());
@@ -697,6 +725,8 @@ public class Utils {
                 mediaModel.images.set(Utils.appendUrl(crew.getPosterPath(),
                         getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                         R.dimen.category_vertical_image_width));
+                mediaModel.thumbnail.set(Utils.appendThumbnail(crew.getPosterPath(),
+                        getApplictionContext().getConfiguration().getImages().getPosterSizes()));
 
                 if (!TextUtils.isEmpty(crew.getOverview())) {
                     mediaModel.overview.set(crew.getOverview());
@@ -732,6 +762,8 @@ public class Utils {
                     mediaModel.images.set(Utils.appendUrl(cast.getProfilePath(),
                             getApplictionContext().getConfiguration().getImages().getProfileSizes(),
                             R.dimen.people_item_width));
+                    mediaModel.thumbnail.set(Utils.appendThumbnail(cast.getProfilePath(),
+                            getApplictionContext().getConfiguration().getImages().getProfileSizes()));
 
                     mediaModel.setId(cast.getId());
                     mediaModel.setTitle(cast.getName());
@@ -760,6 +792,8 @@ public class Utils {
                         mediaModel.images.set(Utils.appendUrl(crew.getProfilePath(),
                                 getApplictionContext().getConfiguration().getImages().getProfileSizes(),
                                 R.dimen.people_item_width));
+                        mediaModel.thumbnail.set(Utils.appendThumbnail(crew.getProfilePath(),
+                                getApplictionContext().getConfiguration().getImages().getProfileSizes()));
 
                         mediaModel.setId(crew.getId());
                         mediaModel.setTitle(crew.getName());
@@ -827,6 +861,8 @@ public class Utils {
                 mediaModel.images.set(Utils.appendUrl(searchMulti.getPosterPath(),
                         getApplictionContext().getConfiguration().getImages().getPosterSizes(),
                         R.dimen.category_vertical_image_width));
+                mediaModel.thumbnail.set(Utils.appendThumbnail(searchMulti.getPosterPath(),
+                        getApplictionContext().getConfiguration().getImages().getPosterSizes()));
                 mediaModel.voteAverages.set(Utils.formatDouble(searchMulti.getVoteAverage()));
 
                 mediaModel.setId(searchMulti.getId());

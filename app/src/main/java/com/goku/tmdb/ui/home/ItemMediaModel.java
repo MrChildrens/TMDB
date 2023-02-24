@@ -19,6 +19,7 @@ public class ItemMediaModel implements Serializable {
     public ObservableField<String> titles = new ObservableField<>();
     public transient ObservableField<String> subTitles = new ObservableField<>();
     public ObservableField<String> images = new ObservableField<>();
+    public transient ObservableField<String> thumbnail = new ObservableField<>();
     public ObservableField<String> releaseDates = new ObservableField<>();
     public transient ObservableField<Double> voteAverages = new ObservableField<>();
     public transient ObservableField<Boolean> isHideVote = new ObservableField<>(false);
