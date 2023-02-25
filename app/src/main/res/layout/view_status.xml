@@ -53,9 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClickListener="@{viewModel.onErrorClickListener}"
-                android:padding="@dimen/common_margin"
                 android:text="@string/tap_to_retry"
-                android:textColor="@color/contrary_main_bg_color" />
+                android:textColor="@{viewModel.lightMutedColor}" />
 
         </LinearLayout>
 
