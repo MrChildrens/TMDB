@@ -1061,6 +1061,11 @@ public class Utils {
             categoryModel.bodyTextColor.set(lightMutedColor);
         }
         categoryModel.isDark.set(isDark);
+
+        categoryModel.statusModel.dominantColor.set(dominantColor);
+        categoryModel.statusModel.mutedColor.set(mutedColor);
+        categoryModel.statusModel.lightMutedColor.set(lightMutedColor);
+        categoryModel.statusModel.isDark.set(isDark);
     }
 
     public static String formatSeasonName(int number) {

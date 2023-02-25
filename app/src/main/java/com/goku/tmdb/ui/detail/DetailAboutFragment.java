@@ -154,10 +154,6 @@ public class DetailAboutFragment extends BaseFragment<FragmentDetailAboutBinding
             }
         }
 
-        mViewModel.statusModel.dominantColor.set(detailViewModel.dominantColor.get());
-        mViewModel.statusModel.mutedColor.set(detailViewModel.titleTextColor.get());
-        mViewModel.statusModel.lightMutedColor.set(detailViewModel.bodyTextColor.get());
-        mViewModel.statusModel.isDark.set(detailViewModel.isDark.get());
         mViewBinding.setViewModel(mViewModel);
     }
 
