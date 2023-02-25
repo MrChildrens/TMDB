@@ -47,7 +47,8 @@ public class SelectLanguageViewModel extends BaseContentViewModel {
 
     private void init() {
         addItem(Locale.SIMPLIFIED_CHINESE);
-        addItem(Locale.TRADITIONAL_CHINESE);
+        addItem(new Locale("zh", "HK"));
+        addItem(new Locale("zh", "TW"));
         addItem(Locale.ENGLISH);
         addItem(Locale.FRENCH);
         addItem(Locale.GERMAN);
@@ -57,22 +58,23 @@ public class SelectLanguageViewModel extends BaseContentViewModel {
 
         addItem(new Locale("uk"));//乌克兰语
         addItem(new Locale("ru"));//俄语
-        addItem(new Locale("hu"));//匈牙利语
-        addItem(new Locale("tr"));//土耳其语
-        addItem(new Locale("sr"));//塞尔维亚语
-        addItem(new Locale("el"));//希腊语
-        addItem(new Locale("ku"));//库尔德语
-        addItem(new Locale("no"));//挪威语
-        addItem(new Locale("cs"));//捷克语
-        addItem(new Locale("sk"));//斯洛伐克语
-        addItem(new Locale("pl"));//波兰语
-        addItem(new Locale("sv"));//瑞典语
-        addItem(new Locale("ro"));//罗马尼亚语
-        addItem(new Locale("fi"));//芬兰语
-        addItem(new Locale("nl"));//荷兰语
-        addItem(new Locale("pt"));//葡萄牙语
-        addItem(new Locale("es"));//西班牙语
-        addItem(new Locale("az"));//阿塞拜疆语
+//        addItem(new Locale("hu"));//匈牙利语
+//        addItem(new Locale("tr"));//土耳其语
+//        addItem(new Locale("sr"));//塞尔维亚语
+//        addItem(new Locale("el"));//希腊语
+//        addItem(new Locale("ku"));//库尔德语
+//        addItem(new Locale("no"));//挪威语
+//        addItem(new Locale("cs"));//捷克语
+//        addItem(new Locale("sk"));//斯洛伐克语
+//        addItem(new Locale("pl"));//波兰语
+//        addItem(new Locale("sv"));//瑞典语
+//        addItem(new Locale("ro"));//罗马尼亚语
+//        addItem(new Locale("fi"));//芬兰语
+//        addItem(new Locale("nl"));//荷兰语
+//        addItem(new Locale("pt"));//葡萄牙语
+//        addItem(new Locale("es"));//西班牙语
+//        addItem(new Locale("az"));//阿塞拜疆语
+
 //        List<Languages> languages = TmdbApplication.getInstance().getConfiguration().getMLanguages();
 //        for (Languages language : languages) {
 //            if (!TextUtils.equals(Locale.SIMPLIFIED_CHINESE.getLanguage(), language.getIso6391())

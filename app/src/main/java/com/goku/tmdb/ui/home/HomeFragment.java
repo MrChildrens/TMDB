@@ -104,14 +104,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             List<ItemCategoryModel> categoryModels = mViewModel.getData();
             for (int i = 0; i < categoryModels.size(); i++) {
                 List<ItemMediaModel> mediaModels = categoryModels.get(i).itemDatas.get();
-                Utils.initCategoryModelPalette(mViewModel.dominantColor.get(), mViewModel.mutedColor.get(),
-                        mViewModel.lightMutedColor.get(), mViewModel.isDark.get(),
+                Utils.initCategoryModelPalette(mViewModel.dominantColor.get(), mViewModel.titleTextColor.get(),
+                        mViewModel.bodyTextColor.get(), mViewModel.isDark.get(),
                         categoryModels.get(i));
 
                 if (mediaModels != null && mediaModels.size() > 0) {
                     for (int j = 0; j < mediaModels.size(); j++) {
-                        Utils.initMediaModelPalette(mViewModel.dominantColor.get(), mViewModel.mutedColor.get(),
-                                mViewModel.lightMutedColor.get(), mViewModel.isDark.get(), mediaModels.get(j));
+                        Utils.initMediaModelPalette(mViewModel.dominantColor.get(), mViewModel.titleTextColor.get(),
+                                mViewModel.bodyTextColor.get(), mViewModel.isDark.get(), mediaModels.get(j));
                     }
                 }
             }

@@ -134,13 +134,13 @@ public class ImageFragment extends BaseFragment<FragmentImageBinding, ImageViewM
                                     Drawable drawable;
                                     if (isDark) {
                                         mViewModel.isDark.set(true);
-                                        mViewModel.lightMutedColor.set(Color.WHITE);
-                                        mViewModel.mutedColor.set(Color.GRAY);
+                                        mViewModel.bodyTextColor.set(Color.WHITE);
+                                        mViewModel.titleTextColor.set(Color.GRAY);
                                         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
                                     } else {
                                         mViewModel.isDark.set(false);
-                                        mViewModel.lightMutedColor.set(Color.BLACK);
-                                        mViewModel.mutedColor.set(Color.GRAY);
+                                        mViewModel.bodyTextColor.set(Color.BLACK);
+                                        mViewModel.titleTextColor.set(Color.GRAY);
 
                                         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                                     }
@@ -149,8 +149,8 @@ public class ImageFragment extends BaseFragment<FragmentImageBinding, ImageViewM
                                     ImagePageViewModel imagePageViewModel = new ViewModelProvider(getActivity(),
                                             AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(ImagePageViewModel.class);
                                     imagePageViewModel.dominantColor.set(mViewModel.dominantColor.get());
-                                    imagePageViewModel.mutedColor.set(mViewModel.mutedColor.get());
-                                    imagePageViewModel.lightMutedColor.set(mViewModel.lightMutedColor.get());
+                                    imagePageViewModel.titleTextColor.set(mViewModel.titleTextColor.get());
+                                    imagePageViewModel.bodyTextColor.set(mViewModel.bodyTextColor.get());
                                     imagePageViewModel.isDark.set(mViewModel.isDark.get());
 
                                 }

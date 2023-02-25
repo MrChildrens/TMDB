@@ -145,9 +145,9 @@ public class ContentListAdapter extends RecyclerView.Adapter {
         NetworkInfoHolder networkInfoHolder;
         CompanyHolder companyHolder;
         ImageView imageView = null;
-        Drawable raduisDrawable = mContext.getResources().getDrawable(Utils.isNightMode() ? R.drawable.radius_bg_while : R.drawable.radius_bg_black);
-        Drawable rectangleDrawable = mContext.getResources().getDrawable(Utils.isNightMode() ? R.drawable.rectangle_bg_while : R.drawable.rectangle_bg_back);
-        Drawable roundDrawable = mContext.getResources().getDrawable(Utils.isNightMode() ? R.drawable.round_bg_while : R.drawable.round_bg_black);
+        Drawable raduisDrawable = mContext.getResources().getDrawable(Utils.isNightMode() ? R.drawable.radius_bg_white : R.drawable.radius_bg_black);
+        Drawable rectangleDrawable = mContext.getResources().getDrawable(Utils.isNightMode() ? R.drawable.rectangle_bg_night : R.drawable.rectangle_bg_back);
+        Drawable roundDrawable = mContext.getResources().getDrawable(Utils.isNightMode() ? R.drawable.round_bg_night : R.drawable.round_bg_black);
         switch (viewType) {
             case PageParams.ITEM_TYPE_MOIVE:
             case PageParams.ITEM_TYPE_TV_SHOW:

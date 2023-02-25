@@ -3,14 +3,14 @@
     <string name="home_page">Startseite</string>
     <string name="movie">Film</string>
     <string name="search">Suchen</string>
-    <string name="tv_show">Fernsehsendung</string>
+    <string name="tv_show">Fernseher</string>
     <string name="celebrities">Figur</string>
     <string name="trending">Beliebt</string>
     <string name="now_playing">Heiße Sendung</string>
     <string name="upcoming">Demnächst</string>
     <string name="popular">Popularität</string>
-    <string name="top_rated">Gut erhalten</string>
-    <string name="airing_today">Heute ausgestrahlt</string>
+    <string name="top_rated">Gut Erhalten</string>
+    <string name="airing_today">Heute Ausgestrahlt</string>
     <string name="on_tv">Fernsehen</string>
 
     <string name="about">Um</string>
@@ -22,8 +22,8 @@
     <string name="episode_count">Folge</string>
     <string name="comments">Kommentar</string>
     <string name="reviews">Auswerten</string>
-    <string name="recommendations">推荐</string>
-    <string name="similar">ähnlich</string>
+    <string name="recommendations">Empfehlen</string>
+    <string name="similar">Ähnlich</string>
     <string name="hour">Stunde</string>
     <string name="min">Minute</string>
     <string name="no_overview_tip">Wir haben keine Zusammenfassung.</string>
@@ -31,7 +31,7 @@
     <string name="genres">Typ</string>
     <string name="network">Netzwerk</string>
     <string name="original_title">Herkunftsland</string>
-    <string name="aired_episodes">Folgen ausgestrahlt</string>
+    <string name="aired_episodes">Folgen Ausgestrahlt</string>
     <string name="status">Zustand</string>
     <string name="runtime">Dauer</string>
     <string name="original_language">Ursprache</string>
@@ -42,9 +42,9 @@
     <string name="revenue">Theaterkasse</string>
     <string name="alternative_titles">Alias</string>
     <string name="connection_error">Prüfe deine Internetverbindung</string>
-    <string name="tap_to_retry">Klicken Sie auf Wiederholen</string>
+    <string name="tap_to_retry">Klicken Sie Auf Wiederholen</string>
     <string name="movie_info">Filminformationen</string>
-    <string name="tv_info">Informationen zum TV-Drama</string>
+    <string name="tv_info">Informationen Zum TV-Drama</string>
     <string name="video">Video</string>
     <string name="keywords">Schlüsselwörter</string>
     <string name="posters">Poster</string>
@@ -53,12 +53,12 @@
     <string name="gender">Geschlecht</string>
     <string name="female">Weiblich</string>
     <string name="male">Männlich</string>
-    <string name="born_on">Geboren in</string>
-    <string name="died_on">Starb in</string>
+    <string name="born_on">Geboren In</string>
+    <string name="died_on">Starb In</string>
     <string name="from">Aus</string>
     <string name="biography">Persönliches Profil</string>
-    <string name="also_known_as">Wird auch genannt</string>
-    <string name="season_info">Informationen zur Saison</string>
+    <string name="also_known_as">Wird Auch Genannt</string>
+    <string name="season_info">Informationen Zur Saison</string>
     <string name="episode_info">Episodeninformationen</string>
     <string name="first_air_date">Erster Vorführtermin</string>
     <string name="seasons_number">Staffelnummer</string>
@@ -85,10 +85,10 @@
     <string name="november">十一月</string>
     <string name="december">十二月</string>
     <string name="premiere">Premiere</string>
-    <string name="theatrical">freigegeben</string>
+    <string name="theatrical">Freigegeben</string>
     <string name="digital">Nummer</string>
-    <string name="physical">In Form von Sachleistungen</string>
-    <string name="release_info">Informationen freigeben</string>
+    <string name="physical">In Form Von Sachleistungen</string>
+    <string name="release_info">Informationen Freigeben</string>
     <string name="your_account">Ihr Konto</string>
     <string name="sign_in_sign_up">Anmeldung Registrieren</string>
     <string name="logout">Ausloggen</string>
@@ -123,7 +123,8 @@
     <string name="search_bg_hint">Finden Sie Ihre Lieblingsfilme, Fernsehsendungen und Personen</string>
     <string name="today">Tag</string>
     <string name="week">Woche</string>
-    <string name="remember_password">Passwort merken</string>
+    <string name="remember_password">Passwort Merken</string>
     <string name="application_language">Anwendungssprache</string>
-    <string name="follow_system">Dem System folgen</string>
+    <string name="follow_system">Dem System Folgen</string>
+    <string name="sort_by">排序方式</string>
 </resources>

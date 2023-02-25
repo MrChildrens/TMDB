@@ -142,21 +142,21 @@ public class DetailAboutFragment extends BaseFragment<FragmentDetailAboutBinding
                 AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
         for (int i = 0; i < categoryModels.get().size(); i++) {
             List<ItemMediaModel> mediaModels = categoryModels.get().get(i).itemDatas.get();
-            Utils.initCategoryModelPalette(detailViewModel.dominantColor.get(), detailViewModel.mutedColor.get(),
-                    detailViewModel.lightMutedColor.get(), detailViewModel.isDark.get(),
+            Utils.initCategoryModelPalette(detailViewModel.dominantColor.get(), detailViewModel.titleTextColor.get(),
+                    detailViewModel.bodyTextColor.get(), detailViewModel.isDark.get(),
                     categoryModels.get().get(i));
 
             if (mediaModels != null && mediaModels.size() > 0) {
                 for (int j = 0; j < mediaModels.size(); j++) {
-                    Utils.initMediaModelPalette(detailViewModel.dominantColor.get(), detailViewModel.mutedColor.get(),
-                            detailViewModel.lightMutedColor.get(), detailViewModel.isDark.get(), mediaModels.get(j));
+                    Utils.initMediaModelPalette(detailViewModel.dominantColor.get(), detailViewModel.titleTextColor.get(),
+                            detailViewModel.bodyTextColor.get(), detailViewModel.isDark.get(), mediaModels.get(j));
                 }
             }
         }
 
         mViewModel.statusModel.dominantColor.set(detailViewModel.dominantColor.get());
-        mViewModel.statusModel.mutedColor.set(detailViewModel.mutedColor.get());
-        mViewModel.statusModel.lightMutedColor.set(detailViewModel.lightMutedColor.get());
+        mViewModel.statusModel.mutedColor.set(detailViewModel.titleTextColor.get());
+        mViewModel.statusModel.lightMutedColor.set(detailViewModel.bodyTextColor.get());
         mViewModel.statusModel.isDark.set(detailViewModel.isDark.get());
         mViewBinding.setViewModel(mViewModel);
     }

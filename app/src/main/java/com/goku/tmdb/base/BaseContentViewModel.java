@@ -50,8 +50,8 @@ public abstract class BaseContentViewModel extends BaseViewModel<TmdbRepository>
     public final StatusModel statusModel = new StatusModel();
 
     public ObservableField<Integer> dominantColor;
-    public ObservableField<Integer> mutedColor;
-    public ObservableField<Integer> lightMutedColor;
+    public ObservableField<Integer> titleTextColor;
+    public ObservableField<Integer> bodyTextColor;
     public ObservableField<Boolean> isDark = new ObservableField<>(false);
     public MutableLiveData<Object> refreshColor = new MutableLiveData<>();
 
@@ -72,13 +72,13 @@ public abstract class BaseContentViewModel extends BaseViewModel<TmdbRepository>
         if (!Utils.isNightMode()) {
             isDark = new ObservableField<>(false);
             dominantColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.white));
-            mutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
-            lightMutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.black));
+            titleTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
+            bodyTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.black));
         } else {
             isDark = new ObservableField<>(true);
             dominantColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.tmdb_primary_color));
-            mutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
-            lightMutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.white));
+            titleTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
+            bodyTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.white));
         }
     }
 
@@ -255,8 +255,8 @@ public abstract class BaseContentViewModel extends BaseViewModel<TmdbRepository>
             @Override
             public void accept(Throwable throwable) throws Exception {
                 Log.d(TAG, "[Ciel_Debug] accept: " + throwable);
-//                showError(itemCategoryModel);
-                getMovies(observable, itemCategoryModel);
+                showError(itemCategoryModel);
+//                getMovies(observable, itemCategoryModel);
             }
         });
         mMap.put(String.valueOf(itemCategoryModel.getCategoryType()), disposable);
@@ -331,8 +331,8 @@ public abstract class BaseContentViewModel extends BaseViewModel<TmdbRepository>
             @Override
             public void accept(Throwable throwable) throws Exception {
                 Log.d(TAG, "[Ciel_Debug] accept: " + throwable);
-                getTvs(observable, itemCategoryModel);
-//                showError(itemCategoryModel);
+//                getTvs(observable, itemCategoryModel);
+                showError(itemCategoryModel);
             }
         });
         mMap.put(String.valueOf(itemCategoryModel.getCategoryType()), disposable);

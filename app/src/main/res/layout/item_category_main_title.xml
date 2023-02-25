@@ -26,8 +26,8 @@
             android:layout_marginStart="@dimen/common_margin"
             android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/common_margin"
-            android:textColor="@{(int)viewModel.lightMutedColor}"
-            android:text="@{viewModel.titles}" />
+            android:text="@{viewModel.titles}"
+            android:textColor="@{(int)viewModel.titleTextColor}" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

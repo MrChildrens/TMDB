@@ -197,8 +197,8 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
         if (getActivity() instanceof DetailActivity) {
             DetailViewModel detailViewModel = new ViewModelProvider(getActivity(), AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
             mViewModel.dominantColor.set(detailViewModel.dominantColor.get());
-            mViewModel.mutedColor.set(detailViewModel.mutedColor.get());
-            mViewModel.lightMutedColor.set(detailViewModel.lightMutedColor.get());
+            mViewModel.titleTextColor.set(detailViewModel.titleTextColor.get());
+            mViewModel.bodyTextColor.set(detailViewModel.bodyTextColor.get());
             mViewModel.isDark.set(detailViewModel.isDark.get());
             mViewModel.isGridMode.set(Utils.isGridMode());
         }
@@ -286,25 +286,25 @@ public class ContentListFragment extends BaseFragment<FragmentContentListBinding
                 if (getActivity() instanceof DetailActivity) {
                     DetailViewModel detailViewModel = new ViewModelProvider(getActivity(), AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
                     for (int i = 0; i < categoryModel.itemDatas.get().size(); i++) {
-                        Utils.initMediaModelPalette(detailViewModel.dominantColor.get(), detailViewModel.mutedColor.get(), detailViewModel.lightMutedColor.get(), detailViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
+                        Utils.initMediaModelPalette(detailViewModel.dominantColor.get(), detailViewModel.titleTextColor.get(), detailViewModel.bodyTextColor.get(), detailViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
                     }
                     itemCategoryModel.statusModel.dominantColor.set(detailViewModel.dominantColor.get());
-                    itemCategoryModel.statusModel.mutedColor.set(detailViewModel.mutedColor.get());
-                    itemCategoryModel.statusModel.lightMutedColor.set(detailViewModel.lightMutedColor.get());
+                    itemCategoryModel.statusModel.mutedColor.set(detailViewModel.titleTextColor.get());
+                    itemCategoryModel.statusModel.lightMutedColor.set(detailViewModel.bodyTextColor.get());
                     itemCategoryModel.statusModel.isDark.set(detailViewModel.isDark.get());
                     mViewBinding.setViewModel(mViewModel);
                 }
                 if (getActivity() instanceof ContentPageActivity) {
                     ContentPageViewModel contentPageViewModel = new ViewModelProvider(getActivity(), AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(ContentPageViewModel.class);
                     for (int i = 0; i < categoryModel.itemDatas.get().size(); i++) {
-                        Utils.initMediaModelPalette(contentPageViewModel.dominantColor.get(), contentPageViewModel.mutedColor.get(), contentPageViewModel.lightMutedColor.get(), contentPageViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
+                        Utils.initMediaModelPalette(contentPageViewModel.dominantColor.get(), contentPageViewModel.titleTextColor.get(), contentPageViewModel.bodyTextColor.get(), contentPageViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
                     }
                 }
                 Fragment fragment = getFragmentManager().findFragmentById(R.id.fl_fragment_container);
                 if (fragment instanceof SearchFragment) {
                     SearchViewModel searchViewModel = new ViewModelProvider(fragment, AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(SearchViewModel.class);
                     for (int i = 0; i < categoryModel.itemDatas.get().size(); i++) {
-                        Utils.initMediaModelPalette(searchViewModel.dominantColor.get(), searchViewModel.mutedColor.get(), searchViewModel.lightMutedColor.get(), searchViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
+                        Utils.initMediaModelPalette(searchViewModel.dominantColor.get(), searchViewModel.titleTextColor.get(), searchViewModel.bodyTextColor.get(), searchViewModel.isDark.get(), categoryModel.itemDatas.get().get(i));
                     }
                 }
 

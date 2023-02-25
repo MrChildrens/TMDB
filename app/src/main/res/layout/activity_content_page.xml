@@ -32,10 +32,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:background="@drawable/round_bg"
+                    android:background="@{viewModel.isDark ? @drawable/round_bg_night : @drawable/round_bg_black}"
                     android:onClickListener="@{viewModel.onBackClickListener}"
                     android:padding="@dimen/button_padding"
-                    android:src="@drawable/ic_arrow_back" />
+                    android:src="@{viewModel.isDark ? @drawable/ic_arrow_back_night : @drawable/ic_arrow_back_black}" />
 
                 <TextView
                     style="@style/main_title_style"
@@ -43,14 +43,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:text="@{viewModel.title}"
-                    android:textColor="@{(int)viewModel.lightMutedColor}" />
+                    android:textColor="@{(int)viewModel.bodyTextColor}" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="@dimen/common_margin"
-                    android:background="@{viewModel.isGridMode ? @drawable/ic_list : @drawable/ic_grid}"
+                    android:background="@{viewModel.isGridMode ? @drawable/ic_sort_list : @drawable/ic_sort_grid}"
                     android:onClickListener="@{viewModel.onGridClickListener}" />
 
             </androidx.appcompat.widget.Toolbar>

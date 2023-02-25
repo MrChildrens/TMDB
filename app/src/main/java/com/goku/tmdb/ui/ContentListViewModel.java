@@ -34,6 +34,13 @@ public class ContentListViewModel extends BaseContentViewModel {
         }
     };
 
+    public View.OnClickListener onFilterClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
     public ContentListViewModel(@NonNull Application application, TmdbRepository model) {
         super(application, model);
         isGridMode.set(Utils.isGridMode());

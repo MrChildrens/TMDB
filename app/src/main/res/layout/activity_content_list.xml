@@ -31,34 +31,60 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height"
+                app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:titleTextColor="@color/content_text_color">
 
-                <ImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:background="@drawable/round_bg"
-                    android:onClickListener="@{viewModel.onBackClickListener}"
-                    android:padding="@dimen/button_padding"
-                    android:src="@drawable/ic_arrow_back" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    style="@style/main_title_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:text="@{viewModel.title}"
-                    android:textColor="@{(int)viewModel.lightMutedColor}" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="@dimen/common_margin"
-                    android:background="@{viewModel.isGridMode ? @drawable/ic_list : @drawable/ic_grid}"
-                    android:onClickListener="@{viewModel.onGridClickListener}" />
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_margin"
+                        android:background="@{viewModel.isDark ? @drawable/round_bg_night : @drawable/round_bg_black}"
+                        android:onClickListener="@{viewModel.onBackClickListener}"
+                        android:padding="@dimen/button_padding"
+                        android:src="@{viewModel.isDark ? @drawable/ic_arrow_back_night : @drawable/ic_arrow_back_black}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        style="@style/main_title_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_margin"
+                        android:text="@{viewModel.title}"
+                        android:textColor="@{(int)viewModel.bodyTextColor}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_back"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/common_margin"
+                        android:background="@{viewModel.isDark ? @drawable/ic_filter_night : @drawable/ic_filter_black}"
+                        android:onClickListener="@{viewModel.onFilterClickListener}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/iv_switch_grid"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_switch_grid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/common_margin"
+                        android:background="@{viewModel.isGridMode ? @drawable/ic_sort_list : @drawable/ic_sort_grid}"
+                        android:onClickListener="@{viewModel.onGridClickListener}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -77,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.totalStr}"
-                    android:textColor="@{(int)viewModel.lightMutedColor}"
+                    android:textColor="@{(int)viewModel.bodyTextColor}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.pageStr}"
-                    android:textColor="@{(int)viewModel.lightMutedColor}"
+                    android:textColor="@{(int)viewModel.bodyTextColor}"
                     android:visibility="@{TextUtils.isEmpty(viewModel.pageStr) ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/common_margin"
                 android:text="@{viewModel.totalStr}"
-                android:textColor="@{(int)viewModel.lightMutedColor}"
+                android:textColor="@{(int)viewModel.bodyTextColor}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/common_margin"
                 android:text="@{viewModel.pageStr}"
-                android:textColor="@{(int)viewModel.lightMutedColor}"
+                android:textColor="@{(int)viewModel.bodyTextColor}"
                 android:visibility="@{TextUtils.isEmpty(viewModel.pageStr) ? View.GONE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

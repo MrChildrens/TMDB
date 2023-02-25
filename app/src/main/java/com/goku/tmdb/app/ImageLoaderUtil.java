@@ -85,9 +85,9 @@ public class ImageLoaderUtil {
     private DisplayImageOptions getDefaultOptions() {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 //图片地址为空的时候
-                .showImageForEmptyUri(R.drawable.ic_audience_while)
+                .showImageForEmptyUri(R.drawable.ic_audience_night)
                 //图片下载失败的时候显示
-                .showImageOnFail(R.drawable.ic_audience_while)
+                .showImageOnFail(R.drawable.ic_audience_night)
                 //图片可以缓存在内存
                 .cacheInMemory(true)
                 //图片可以缓存在硬盘

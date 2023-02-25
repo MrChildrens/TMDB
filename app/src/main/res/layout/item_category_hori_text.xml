@@ -27,10 +27,10 @@
             style="@style/sub_title_style"
             android:layout_width="@dimen/detail_info_title_width"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:hint="@string/original_title"
             android:text="@{viewModel.titles}"
-            android:textColor="@{(int)viewModel.mutedColor}"
-            android:layout_gravity="center_vertical"
+            android:textColor="@{(int)viewModel.titleTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.content) ? View.GONE : View.VISIBLE}" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@{viewModel.content}"
-            android:textColor="@{(int)viewModel.lightMutedColor}"
+            android:textColor="@{(int)viewModel.bodyTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.content) ? View.GONE : View.VISIBLE}" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

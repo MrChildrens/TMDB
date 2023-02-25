@@ -120,7 +120,7 @@ public class ContentPageActivity extends BaseActivity<ActivityContentPageBinding
     }
 
     private void initMagicIndicator() {
-        int normalColor = mViewModel.lightMutedColor.get();
+        int normalColor = mViewModel.bodyTextColor.get();
 //        int selectedColor = mViewModel.mutedColor.get();
         int selectedColor = getResources().getColor(R.color.tmdb_secondary_color);
         CommonNavigator commonNavigator = new CommonNavigator(this);

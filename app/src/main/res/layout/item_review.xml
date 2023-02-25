@@ -14,14 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/common_margin"
-        android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+        android:background="@{viewModel.isDark ? @drawable/radius_bg_white : @drawable/radius_bg_black}"
         android:padding="@dimen/common_margin">
 
         <com.goku.tmdb.ui.view.CircleImageView
             android:id="@+id/iv_cover"
             android:layout_width="@dimen/review_avatar_size"
             android:layout_height="@dimen/review_avatar_size"
-            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+            android:background="@{viewModel.isDark ? @drawable/round_bg_night : @drawable/round_bg_black}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:url="@{viewModel.images}" />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin"
             android:text="@{viewModel.author}"
-            android:textColor="@{(int)viewModel.lightMutedColor}"
+            android:textColor="@{(int)viewModel.bodyTextColor}"
             app:layout_constraintStart_toEndOf="@id/iv_cover"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,9 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_margin"
-            android:drawableStart="@drawable/ic_rating_yellow"
+            android:drawableStart="@drawable/ic_rating"
             android:text="@{viewModel.voteAverages.toString()}"
-            android:textColor="@{viewModel.lightMutedColor}"
+            android:textColor="@{viewModel.bodyTextColor}"
             app:layout_constraintBottom_toBottomOf="@id/tv_author"
             app:layout_constraintStart_toEndOf="@id/tv_author"
             app:layout_constraintTop_toTopOf="@+id/tv_author" />
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/common_margin"
             android:text="@{viewModel.createdTime}"
-            android:textColor="@{(int)viewModel.mutedColor}"
+            android:textColor="@{(int)viewModel.titleTextColor}"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover"
             app:layout_constraintStart_toStartOf="@id/tv_author" />
 
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin"
             android:text="@{viewModel.content}"
-            android:textColor="@{(int)viewModel.lightMutedColor}"
+            android:textColor="@{(int)viewModel.bodyTextColor}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_cover" />
 

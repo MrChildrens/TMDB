@@ -105,7 +105,7 @@
 
             <TextView
                 style="@style/sub_title_style"
-                android:layout_width="180dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="@dimen/common_margin"

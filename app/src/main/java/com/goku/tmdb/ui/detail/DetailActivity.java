@@ -143,7 +143,7 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
 //                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                             Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
                                 @Override
                                 public void onGenerated(@Nullable Palette palette) {
@@ -151,6 +151,8 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                                         initView();
                                         return;
                                     }
+
+
                                     mViewModel.dominantColor.set(palette.getDominantColor(Color.WHITE));
 
                                     boolean isDark = Utils.isNightMode();
@@ -173,18 +175,21 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                                     Drawable drawable;
                                     if (isDark) {
                                         mViewModel.isDark.set(true);
-                                        mViewModel.lightMutedColor.set(Color.WHITE);
-                                        mViewModel.mutedColor.set(getResources().getColor(R.color.sub_title_color));
-                                        drawable = ContextCompat.getDrawable(DetailActivity.this, R.drawable.ic_audience_while);
+                                        mViewModel.bodyTextColor.set(Color.WHITE);
+                                        mViewModel.titleTextColor.set(getResources().getColor(R.color.sub_title_color));
+                                        drawable = ContextCompat.getDrawable(DetailActivity.this, R.drawable.ic_audience_night);
                                         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
                                     } else {
                                         mViewModel.isDark.set(false);
-                                        mViewModel.lightMutedColor.set(Color.BLACK);
-                                        mViewModel.mutedColor.set(getResources().getColor(R.color.sub_title_color));
+                                        mViewModel.bodyTextColor.set(Color.BLACK);
+                                        mViewModel.titleTextColor.set(getResources().getColor(R.color.sub_title_color));
                                         drawable = ContextCompat.getDrawable(DetailActivity.this, R.drawable.ic_audience_black);
 
                                         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                                     }
+                                    mViewModel.dominantColor.set(mostPopularSwatch.getRgb());
+//                                    mViewModel.bodyTextColor.set(mostPopularSwatch.getBodyTextColor());
+                                    mViewModel.titleTextColor.set(mostPopularSwatch.getTitleTextColor());
                                     if (drawable != null) {
                                         drawable.setBounds(0, 0, getResources().getDimensionPixelOffset(R.dimen.button_drawable_width),
                                                 getResources().getDimensionPixelOffset(R.dimen.button_drawable_width));
@@ -447,9 +452,9 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
     }
 
     private void initMagicIndicator() {
-        int normalColor = mViewModel.lightMutedColor.get();
-//        int selectedColor = mViewModel.mutedColor.get();
-        int selectedColor = getResources().getColor(R.color.tmdb_secondary_color);
+        int normalColor = mViewModel.bodyTextColor.get();
+        int selectedColor = mViewModel.titleTextColor.get();
+//        int selectedColor = getResources().getColor(R.color.tmdb_secondary_color);
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override

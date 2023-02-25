@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.goku.tmdb.R;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -155,55 +157,17 @@ public class Utils {
     }
 
     public static String formatDate(String date) {
+//        Log.d(TAG, "[Ciel_Debug] formatDate22222: " + Date.parse(date));
+//        Date date1 = new Date(Date.parse(date));
         String result;
         try {
             String[] split = date.split("-");
             if (TextUtils.equals(Utils.getLanguage(), Locale.SIMPLIFIED_CHINESE.getLanguage())) {
-                result = Integer.valueOf(split[0]) + getApplictionContext().getString(R.string.year)
-                        + Integer.valueOf(split[1]) + getApplictionContext().getString(R.string.month)
-                        + Integer.valueOf(split[2]) + getApplictionContext().getString(R.string.day);
+                result = Integer.valueOf(split[0]) + getContext().getString(R.string.year)
+                        + Integer.valueOf(split[1]) + getContext().getString(R.string.month)
+                        + Integer.valueOf(split[2]) + getContext().getString(R.string.day);
             } else {
                 return date;
-//                String month = "";
-//                switch (split[1]) {
-//                    case "1":
-//                        month = getString(R.string.january);
-//                        break;
-//                    case "2":
-//                        month = getString(R.string.february);
-//                        break;
-//                    case "3":
-//                        month = getString(R.string.march);
-//                        break;
-//                    case "4":
-//                        month = getString(R.string.april);
-//                        break;
-//                    case "5":
-//                        month = getString(R.string.may);
-//                        break;
-//                    case "6":
-//                        month = getString(R.string.june);
-//                        break;
-//                    case "7":
-//                        month = getString(R.string.july);
-//                        break;
-//                    case "8":
-//                        month = getString(R.string.august);
-//                        break;
-//                    case "9":
-//                        month = getString(R.string.september);
-//                        break;
-//                    case "10":
-//                        month = getString(R.string.october);
-//                        break;
-//                    case "11":
-//                        month = getString(R.string.november);
-//                        break;
-//                    case "12":
-//                        month = getString(R.string.december);
-//                        break;
-//                }
-//                result = split[2] + ", " + split[1] + ", " + split[0];
             }
         } catch (Exception e) {
             return date;
@@ -312,8 +276,8 @@ public class Utils {
 
     public static String formatRuntime(Integer runtime) {
         if (runtime != null) {
-            String hour = runtime / 60 + getApplictionContext().getResources().getString(R.string.hour);
-            String min = runtime % 60 + getApplictionContext().getResources().getString(R.string.min);
+            String hour = runtime / 60 + getContext().getString(R.string.hour);
+            String min = runtime % 60 + getContext().getString(R.string.min);
             if (runtime / 60 > 0) {
                 return hour + " " + min;
             } else {
@@ -361,12 +325,12 @@ public class Utils {
                 if (!TextUtils.isEmpty(movie.getReleaseDate())) {
                     mediaModel.releaseDates.set(Utils.formatDate(movie.getReleaseDate()));
                 } else {
-                    mediaModel.releaseDates.set(getString(R.string.unknow_date));
+                    mediaModel.releaseDates.set(getContext().getString(R.string.unknow_date));
                 }
                 if (!TextUtils.isEmpty(movie.getOverview())) {
                     mediaModel.overview.set(movie.getOverview());
                 } else {
-                    mediaModel.overview.set(getString(R.string.no_overview_tip));
+                    mediaModel.overview.set(getContext().getString(R.string.no_overview_tip));
                 }
 
                 mediaModel.setBackdropPath(movie.getBackdropPath());
@@ -404,12 +368,12 @@ public class Utils {
                 if (!TextUtils.isEmpty(part.getReleaseDate())) {
                     mediaModel.releaseDates.set(Utils.formatDate(part.getReleaseDate()));
                 } else {
-                    mediaModel.releaseDates.set(getString(R.string.unknow_date));
+                    mediaModel.releaseDates.set(getContext().getString(R.string.unknow_date));
                 }
                 if (!TextUtils.isEmpty(part.getOverview())) {
                     mediaModel.overview.set(part.getOverview());
                 } else {
-                    mediaModel.overview.set(getString(R.string.no_overview_tip));
+                    mediaModel.overview.set(getContext().getString(R.string.no_overview_tip));
                 }
 
                 mediaModel.setBackdropPath(part.getBackdropPath());
@@ -452,12 +416,12 @@ public class Utils {
                 if (!TextUtils.isEmpty(tv.getFirstAirDate())) {
                     mediaModel.releaseDates.set(Utils.formatDate(tv.getFirstAirDate()));
                 } else {
-                    mediaModel.releaseDates.set(getString(R.string.unknow_date));
+                    mediaModel.releaseDates.set(getContext().getString(R.string.unknow_date));
                 }
                 if (!TextUtils.isEmpty(tv.getOverview())) {
                     mediaModel.overview.set(tv.getOverview());
                 } else {
-                    mediaModel.overview.set(getString(R.string.no_overview_tip));
+                    mediaModel.overview.set(getContext().getString(R.string.no_overview_tip));
                 }
 
                 mediaModel.setBackdropPath(tv.getBackdropPath());
@@ -488,7 +452,7 @@ public class Utils {
                     mediaModel.setItemType(PageParams.ITEM_TYPE_SEASONS);
                     String name = "";
                     if (season.getSeasonNumber() == 0) {
-                        name = getString(R.string.specials);
+                        name = getContext().getString(R.string.specials);
                     } else {
                         name = getContext().getString(R.string.season_number_format, season.getSeasonNumber());
                     }
@@ -684,7 +648,7 @@ public class Utils {
                 if (!TextUtils.isEmpty(cast.getOverview())) {
                     mediaModel.overview.set(cast.getOverview());
                 } else {
-                    mediaModel.overview.set(getString(R.string.no_overview_tip));
+                    mediaModel.overview.set(getContext().getString(R.string.no_overview_tip));
                 }
                 mediaModel.voteAverages.set(Utils.formatDouble(cast.getVoteAverage()));
 
@@ -742,7 +706,7 @@ public class Utils {
                 if (!TextUtils.isEmpty(crew.getOverview())) {
                     mediaModel.overview.set(crew.getOverview());
                 } else {
-                    mediaModel.overview.set(getString(R.string.no_overview_tip));
+                    mediaModel.overview.set(getContext().getString(R.string.no_overview_tip));
                 }
                 mediaModel.voteAverages.set(Utils.formatDouble(crew.getVoteAverage()));
 
@@ -839,7 +803,7 @@ public class Utils {
                         mediaModel.setItemType(PageParams.ITEM_TYPE_REVIEWS);
                         mediaModel.images.set(Utils.getGravatarPath() + review.getAuthorDetails().getAvatarPath());
                         mediaModel.author.set(review.getAuthor());
-                        String createdStr = Utils.getContext().getString(R.string.review_created_time_fromat, review.getAuthor(), review.getCreatedAt().substring(0, 10));
+                        String createdStr = getContext().getString(R.string.review_created_time_fromat, review.getAuthor(), review.getCreatedAt().substring(0, 10));
                         mediaModel.createdTime.set(createdStr);
                         mediaModel.content.set(review.getContent());
                         Double rating = authorDetails.getRating();
@@ -1078,10 +1042,10 @@ public class Utils {
             mediaModel.dominantColor.set(dominantColor);
         }
         if (mutedColor != 0) {
-            mediaModel.mutedColor.set(mutedColor);
+            mediaModel.titleTextColor.set(mutedColor);
         }
         if (lightMutedColor != 0) {
-            mediaModel.lightMutedColor.set(lightMutedColor);
+            mediaModel.bodyTextColor.set(lightMutedColor);
         }
         mediaModel.isDark.set(isDark);
     }
@@ -1091,16 +1055,12 @@ public class Utils {
             categoryModel.dominantColor.set(dominantColor);
         }
         if (mutedColor != 0) {
-            categoryModel.mutedColor.set(mutedColor);
+            categoryModel.titleTextColor.set(mutedColor);
         }
         if (lightMutedColor != 0) {
-            categoryModel.lightMutedColor.set(lightMutedColor);
+            categoryModel.bodyTextColor.set(lightMutedColor);
         }
         categoryModel.isDark.set(isDark);
-    }
-
-    public static String getString(int id) {
-        return getApplictionContext().getString(id);
     }
 
     public static String formatSeasonName(int number) {

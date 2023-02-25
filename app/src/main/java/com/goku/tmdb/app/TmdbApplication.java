@@ -2,7 +2,6 @@ package com.goku.tmdb.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -74,16 +73,6 @@ public class TmdbApplication extends Application {
             }
         });
 
-    }
-
-//    @Override
-//    protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(MultiLanguageUtil.attachBaseContext(newBase));
-//    }
-
-    protected boolean isNightMode() {
-        int curNightMode = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
-        return curNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES;
     }
 
     public static TmdbApplication getInstance() {

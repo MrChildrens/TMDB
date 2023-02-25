@@ -11,8 +11,8 @@ import java.util.List;
 public class ItemMediaModel implements Serializable {
 
     public transient ObservableField<Integer> dominantColor;
-    public transient ObservableField<Integer> mutedColor;
-    public transient ObservableField<Integer> lightMutedColor;
+    public transient ObservableField<Integer> titleTextColor;
+    public transient ObservableField<Integer> bodyTextColor;
     public transient ObservableField<Boolean> isDark;
 
     //media
@@ -66,13 +66,13 @@ public class ItemMediaModel implements Serializable {
             isDark = new ObservableField<>(false);
 //            dominantColor = new ObservableField<>(Utils.getContext().getResources().getColor(R.color.main_bg_color));
             dominantColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.white));
-            mutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
-            lightMutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.black));
+            titleTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
+            bodyTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.black));
         } else {
             isDark = new ObservableField<>(true);
             dominantColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.tmdb_primary_color));
-            mutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
-            lightMutedColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.white));
+            titleTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.sub_title_color));
+            bodyTextColor = new ObservableField<>(Utils.getApplictionContext().getResources().getColor(R.color.white));
         }
     }
 

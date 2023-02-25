@@ -22,13 +22,14 @@
             style="@style/clickable_button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@{viewModel.isDark ? @drawable/radius_bg_while : @drawable/radius_bg_black}"
+            android:background="@{viewModel.isDark ? @drawable/radius_bg_white : @drawable/radius_bg_black}"
             android:drawablePadding="@dimen/button_padding"
             android:paddingStart="@dimen/common_margin"
             android:paddingTop="@dimen/button_padding"
             android:paddingEnd="@dimen/common_margin"
             android:paddingBottom="@dimen/button_padding"
             android:text="@{viewModel.titles}"
+            android:textColor="@{viewModel.bodyTextColor}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

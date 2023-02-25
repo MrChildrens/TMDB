@@ -25,7 +25,7 @@
             android:id="@+id/iv_cover"
             android:layout_width="@dimen/people_item_width"
             android:layout_height="@dimen/people_item_width"
-            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+            android:background="@{viewModel.isDark ? @drawable/round_bg_night : @drawable/round_bg_black}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
             android:layout_marginStart="@dimen/common_margin"
             android:gravity="center_horizontal"
             android:text="@{viewModel.titles}"
-            android:textColor="@{(int)viewModel.lightMutedColor}"
+            android:textColor="@{(int)viewModel.bodyTextColor}"
             app:layout_constraintBottom_toTopOf="@id/tv_role"
             app:layout_constraintStart_toEndOf="@id/iv_cover"
             app:layout_constraintTop_toTopOf="@id/iv_cover" />
@@ -51,7 +51,7 @@
             android:layout_marginEnd="@dimen/common_margin"
             android:maxLines="2"
             android:text="@{viewModel.subTitles}"
-            android:textColor="@{(int)viewModel.mutedColor}"
+            android:textColor="@{(int)viewModel.titleTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.subTitles) ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover"
             app:layout_constraintEnd_toEndOf="parent"

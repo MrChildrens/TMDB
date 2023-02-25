@@ -11,7 +11,7 @@
     <string name="popular">Популярный</string>
     <string name="top_rated">Самые популярные</string>
     <string name="airing_today">Сегодня в эфире</string>
-    <string name="on_tv">есть телевизор</string>
+    <string name="on_tv">Eсть телевизор</string>
 
     <string name="about">О</string>
     <string name="overview">Обзор</string>
@@ -19,7 +19,7 @@
     <string name="cast">Бросать</string>
     <string name="seasons">Время года</string>
     <string name="episode">Эпизод</string>
-    <string name="episode_count">Eplisode count</string>
+    <string name="episode_count">Количество эпизодов</string>
     <string name="comments">Комментарий</string>
     <string name="reviews">Обзор</string>
     <string name="recommendations">Рекомендации</string>
@@ -131,5 +131,6 @@
     <string name="remember_password">запомнить пароль</string>
     <string name="application_language">Язык приложения</string>
     <string name="follow_system">Следуйте системе</string>
+    <string name="sort_by">排序方式</string>
 
 </resources>

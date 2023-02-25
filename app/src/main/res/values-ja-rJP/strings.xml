@@ -126,4 +126,5 @@
     <string name="remember_password">パスワードを覚える</string>
     <string name="application_language">パスワードを覚える</string>
     <string name="follow_system">システムに従ってください</string>
+    <string name="sort_by">排序方式</string>
 </resources>

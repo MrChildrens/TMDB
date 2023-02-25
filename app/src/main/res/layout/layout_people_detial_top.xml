@@ -23,7 +23,7 @@
             android:layout_height="@dimen/people_profile_width"
             android:layout_marginStart="@dimen/common_margin"
             android:layout_marginTop="@dimen/toolbar_height"
-            android:background="@{viewModel.isDark ? @drawable/round_bg_while : @drawable/round_bg_black}"
+            android:background="@{viewModel.isDark ? @drawable/round_bg_night : @drawable/round_bg_black}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin"
             android:text="@{viewModel.title}"
-            android:textColor="@{viewModel.lightMutedColor}"
+            android:textColor="@{viewModel.bodyTextColor}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_poster" />
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin"
             android:text="@{viewModel.subTitles}"
-            android:textColor="@{viewModel.mutedColor}"
+            android:textColor="@{viewModel.titleTextColor}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />

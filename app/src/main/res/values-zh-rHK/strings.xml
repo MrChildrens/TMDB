@@ -126,4 +126,5 @@
     <string name="remember_password">記住密碼</string>
     <string name="application_language">應用程序語言</string>
     <string name="follow_system">跟隨系統</string>
+    <string name="sort_by">排序方式</string>
 </resources>

@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_margin"
             android:text="@{viewModel.titles}"
-            android:textColor="@{viewModel.lightMutedColor}"
+            android:textColor="@{viewModel.bodyTextColor}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_margin"
             android:text="@{viewModel.subTitles}"
-            android:textColor="@{viewModel.mutedColor}"
+            android:textColor="@{viewModel.titleTextColor}"
             android:textSize="@dimen/small_title_size"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="@id/tv_category"
@@ -44,10 +44,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_time_switch"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/switch_time_width"
             android:layout_height="20dp"
             android:layout_marginTop="@dimen/common_margin"
-            android:background="@{viewModel.isDark ? @drawable/search_editext_bg_while : @drawable/search_editext_bg}"
+            android:background="@{viewModel.isDark ? @drawable/search_editext_bg_night : @drawable/search_editext_bg}"
             android:visibility="@{viewModel.isShowTimeSwitch ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@id/tv_category"
             app:layout_constraintTop_toBottomOf="@id/tv_category">
@@ -62,7 +62,7 @@
                 android:onClickListener="@{viewModel.onLeftClickListener}"
                 android:singleLine="true"
                 android:text="@string/today"
-                android:textColor="@{viewModel.lightMutedColor}"
+                android:textColor="@{viewModel.bodyTextColor}"
                 app:layout_constraintEnd_toStartOf="@id/btn_right"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -76,7 +76,7 @@
                 android:onClickListener="@{viewModel.onRightClickListener}"
                 android:singleLine="true"
                 android:text="@string/week"
-                android:textColor="@{viewModel.lightMutedColor}"
+                android:textColor="@{viewModel.bodyTextColor}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_left" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -88,10 +88,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/common_margin"
             android:clickable="true"
-            android:drawableEnd="@{viewModel.isDark ? @drawable/ic_more_while : @drawable/ic_more_black}"
+            android:drawableEnd="@{viewModel.isDark ? @drawable/ic_more_night : @drawable/ic_more_black}"
             android:focusable="true"
             android:text="@{viewModel.count}"
-            android:textColor="@{viewModel.lightMutedColor}"
+            android:textColor="@{viewModel.bodyTextColor}"
             app:layout_constraintBottom_toBottomOf="@id/tv_category"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_category" />

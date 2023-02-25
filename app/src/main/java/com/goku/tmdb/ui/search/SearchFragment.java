@@ -154,7 +154,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding, SearchVi
     }
 
     private void initMagicIndicator() {
-        int normalColor = mViewModel.lightMutedColor.get();
+        int normalColor = mViewModel.bodyTextColor.get();
 //        int selectedColor = mViewModel.mutedColor.get();
         int selectedColor = getResources().getColor(R.color.tmdb_secondary_color);
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
@@ -241,13 +241,13 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding, SearchVi
                 ContentListViewModel detailViewModel = new ViewModelProvider(contentListFragment,
                         AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(ContentListViewModel.class);
                 detailViewModel.dominantColor.set(mViewModel.dominantColor.get());
-                detailViewModel.mutedColor.set(mViewModel.mutedColor.get());
-                detailViewModel.lightMutedColor.set(mViewModel.lightMutedColor.get());
+                detailViewModel.titleTextColor.set(mViewModel.titleTextColor.get());
+                detailViewModel.bodyTextColor.set(mViewModel.bodyTextColor.get());
                 detailViewModel.isDark.set(mViewModel.isDark.get());
 
                 detailViewModel.getItemCategoryModel().statusModel.dominantColor.set(mViewModel.dominantColor.get());
-                detailViewModel.getItemCategoryModel().statusModel.mutedColor.set(mViewModel.mutedColor.get());
-                detailViewModel.getItemCategoryModel().statusModel.lightMutedColor.set(mViewModel.lightMutedColor.get());
+                detailViewModel.getItemCategoryModel().statusModel.mutedColor.set(mViewModel.titleTextColor.get());
+                detailViewModel.getItemCategoryModel().statusModel.lightMutedColor.set(mViewModel.bodyTextColor.get());
                 detailViewModel.getItemCategoryModel().statusModel.isDark.set(mViewModel.isDark.get());
             }
 
