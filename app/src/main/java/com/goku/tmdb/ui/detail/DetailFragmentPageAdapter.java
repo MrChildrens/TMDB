@@ -42,6 +42,7 @@ public class DetailFragmentPageAdapter extends FragmentPagerAdapter {
     }
 
     private void init(Context context, ItemMediaModel mediaModel, List<ItemMediaModel> mediaModels) {
+        Log.d(TAG, "[Ciel_Debug] init: " + mediaModels.size());
         switch (mediaModel.getItemType()) {
             case PageParams.ITEM_TYPE_MOIVE:
             case PageParams.ITEM_TYPE_MOIVE_HORI:
@@ -78,6 +79,9 @@ public class DetailFragmentPageAdapter extends FragmentPagerAdapter {
             String category = mCategorys.get(i);
             Log.d(TAG, "[Ciel_Debug] init: " + category);
             Log.d(TAG, "[Ciel_Debug] init: " + mediaModel.getItemType());
+            if (mediaModels.size() > 0) {
+                Log.d(TAG, "[Ciel_Debug] init: " + Utils.formatEpisodeName(mediaModels.get(i).getEpisodeNumber()));
+            }
             if (TextUtils.equals(category, context.getResources().getString(R.string.about))) {
                 mFragments.add(DetailAboutFragment.newInstance(mediaModel));
             } else if (TextUtils.equals(category, context.getResources().getString(R.string.crew))) {
@@ -131,7 +135,6 @@ public class DetailFragmentPageAdapter extends FragmentPagerAdapter {
             } else if (TextUtils.equals(category, context.getResources().getString(R.string.tv_show))) {
                 mFragments.add(ContentListFragment.newInstance(mediaModel, PageParams.CATEGORY_TYPE_TV_PEOPLE, i));
             } else if (TextUtils.equals(category, context.getResources().getString(R.string.episode))) {
-                Log.d(TAG, "[Ciel_Debug] init: " + mediaModel.getItemType());
                 mFragments.add(ContentListFragment.newInstance(mediaModel, PageParams.CATEGORY_TYPE_EPISODES, i));
             } else if (TextUtils.equals(category, Utils.formatEpisodeName(mediaModels.get(i).getEpisodeNumber()))) {
                 mFragments.add(DetailAboutFragment.newInstance(mediaModels.get(i)));

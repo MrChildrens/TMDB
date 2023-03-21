@@ -132,6 +132,7 @@ public abstract class BaseContentViewModel extends BaseViewModel<TmdbRepository>
             case PageParams.CATEGORY_TYPE_SEASONS:
                 getSeasons(itemCategoryModel);
                 break;
+            case PageParams.CATEGORY_TYPE_EPISODE:
             case PageParams.CATEGORY_TYPE_EPISODES:
                 getEpisodes(itemCategoryModel);
                 break;
@@ -571,6 +572,7 @@ public abstract class BaseContentViewModel extends BaseViewModel<TmdbRepository>
             }
         };
         switch (itemCategoryModel.getCategoryType()) {
+            case PageParams.CATEGORY_TYPE_EPISODE:
             case PageParams.CATEGORY_TYPE_EPISODES:
                 observable = mModel.getTvSeasonDetail(itemCategoryModel.getTvId(), itemCategoryModel.getSeasonNumber());
                 break;

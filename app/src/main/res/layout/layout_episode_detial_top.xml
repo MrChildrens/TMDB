@@ -57,11 +57,11 @@
 
         <TextView
             android:id="@+id/tv_smalltitle"
-            style="@style/small_title_style"
+            style="@style/sub_title_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{viewModel.smallTitles}"
-            android:textColor="@{(int)viewModel.titleTextColor}"
+            android:textColor="@{(int)viewModel.bodyTextColor}"
             app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
             app:layout_constraintStart_toStartOf="@id/tv_subtitle"
             app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
@@ -116,9 +116,9 @@
                 android:layout_marginTop="@dimen/common_margin"
                 android:layout_marginBottom="@dimen/common_margin"
                 android:background="@{viewModel.isDark ? @drawable/radius_bg_white : @drawable/radius_bg_black}"
+                android:drawableStart="@{viewModel.isDark ? @drawable/ic_audience_night : @drawable/ic_audience_black}"
                 android:text="@{viewModel.voteCount}"
                 android:textColor="@{(int)viewModel.bodyTextColor}"
-                app:drawableStartCompat="@drawable/ic_audience_night"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/cl_rating"
                 app:layout_constraintTop_toBottomOf="@+id/cl_rating" />

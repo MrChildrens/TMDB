@@ -336,6 +336,9 @@ public class DetailViewModel extends BaseContentViewModel {
         if (!TextUtils.isEmpty(mediaModel.getTitle())) {
             subTitles.set(mediaModel.getTitle());
         }
+        if (!TextUtils.isEmpty(mediaModel.getReleaseDate())) {
+            smallTitles.set(mediaModel.getReleaseDate());
+        }
 
         if (!TextUtils.isEmpty(mediaModel.getBackdropPath())) {
             backdrop.set(Utils.appendUrl(mediaModel.getBackdropPath(),
@@ -370,6 +373,10 @@ public class DetailViewModel extends BaseContentViewModel {
         title.set(mediaModel.getTvTitle() + " | " +
                 Utils.formatSeasonName(mediaModel.getSeasonNumber()) + " | " + Utils.formatEpisodeName(mediaModel.getEpisodeNumber()));
         subTitles.set(mediaModel.getTitle());
+
+        if (!TextUtils.isEmpty(mediaModel.getReleaseDate())) {
+            smallTitles.set(mediaModel.getReleaseDate());
+        }
 
         if (!TextUtils.isEmpty(mediaModel.getPosterPath())) {
             backdrop.set(Utils.appendUrl(mediaModel.getPosterPath(),
@@ -578,9 +585,10 @@ public class DetailViewModel extends BaseContentViewModel {
 
         if (tvDetail.getLastEpisodeToAir() != null) {
             TvDetail.LastEpisodeToAir lastEpisodeToAir = tvDetail.getLastEpisodeToAir();
-            String content = Utils.formatSeasonName(lastEpisodeToAir.getSeasonNumber()) + Utils.formatEpisodeName(lastEpisodeToAir.getSeasonNumber())
-                    + "-" + Utils.formatDate(lastEpisodeToAir.getAirDate());
-            datas.add(addEpisodeItem(lastEpisodeToAir.getId(), getString(R.string.last_episode_to_air), lastEpisodeToAir.getName(), content,
+            String content = Utils.formatSeasonName(lastEpisodeToAir.getSeasonNumber()) + " | " + Utils.formatEpisodeName(lastEpisodeToAir.getSeasonNumber())
+                    + " | " + Utils.formatDate(lastEpisodeToAir.getAirDate());
+            datas.add(addEpisodeItem(lastEpisodeToAir.getShowId(), lastEpisodeToAir.getSeasonNumber(), lastEpisodeToAir.getEpisodeNumber(),
+                    getString(R.string.last_episode_to_air), lastEpisodeToAir.getName(), content,
                     Utils.appendUrl(lastEpisodeToAir.getStillPath(),
                             TmdbApplication.getInstance().getConfiguration().getImages().getStillSizes(),
                             R.dimen.episode_item_width)));
@@ -588,9 +596,10 @@ public class DetailViewModel extends BaseContentViewModel {
 
         if (tvDetail.getNextEpisodeToAir() != null) {
             TvDetail.LastEpisodeToAir nextEpisodeToAir = tvDetail.getNextEpisodeToAir();
-            String content = Utils.formatSeasonName(nextEpisodeToAir.getSeasonNumber()) + Utils.formatEpisodeName(nextEpisodeToAir.getEpisodeNumber())
-                    + "-" + Utils.formatDate(nextEpisodeToAir.getAirDate());
-            datas.add(addEpisodeItem(nextEpisodeToAir.getId(), getString(R.string.next_episode_to_air), nextEpisodeToAir.getName(), content,
+            String content = Utils.formatSeasonName(nextEpisodeToAir.getSeasonNumber()) + " | " + Utils.formatEpisodeName(nextEpisodeToAir.getEpisodeNumber())
+                    + " | " + Utils.formatDate(nextEpisodeToAir.getAirDate());
+            datas.add(addEpisodeItem(nextEpisodeToAir.getShowId(), nextEpisodeToAir.getSeasonNumber(), nextEpisodeToAir.getEpisodeNumber(),
+                    getString(R.string.next_episode_to_air), nextEpisodeToAir.getName(), content,
                     Utils.appendUrl(nextEpisodeToAir.getStillPath(),
                             TmdbApplication.getInstance().getConfiguration().getImages().getStillSizes(),
                             R.dimen.episode_item_width)));
@@ -1028,6 +1037,7 @@ public class DetailViewModel extends BaseContentViewModel {
         List<ItemCategoryModel> datas = new ArrayList<>();
         String overviewStr = getString(R.string.no_overview_tip);
         if (episodesDetail != null) {
+            smallTitles.set(episodesDetail.getAirDate());
             if (!TextUtils.isEmpty(episodesDetail.getOverview())) {
                 overviewStr = episodesDetail.getOverview();
             }
@@ -1096,6 +1106,7 @@ public class DetailViewModel extends BaseContentViewModel {
     private List<ItemCategoryModel> handleSeasonDetail(SeasonDetail seasonDetail) {
         List<ItemCategoryModel> datas = new ArrayList<>();
         if (seasonDetail != null) {
+            smallTitles.set(seasonDetail.getAirDate());
             List<SeasonDetail.Episodes> episodes = seasonDetail.getEpisodes();
             if (episodes != null) {
                 double voteCountInteger = 0.0;
@@ -1731,10 +1742,16 @@ public class DetailViewModel extends BaseContentViewModel {
         return itemCategoryModel;
     }
 
-    private ItemCategoryModel addEpisodeItem(int id, String titles, String subTitle, String content, String image) {
+    private ItemCategoryModel addEpisodeItem(long tvId, int seasonNumber, int episodeNumber,
+                                             String titles, String subTitle, String content, String image) {
         ItemCategoryModel itemCategoryModel = new ItemCategoryModel();
         itemCategoryModel.setCategoryType(PageParams.CATEGORY_TYPE_EPISODE);
-        itemCategoryModel.setId(id);
+        itemCategoryModel.setTvId(tvId);
+        itemCategoryModel.setSeasonNumber(seasonNumber);
+        itemCategoryModel.setEpisodeNumber(episodeNumber);
+
+        itemCategoryModel.setTvTitle(titles);
+
         itemCategoryModel.titles.set(titles);
         itemCategoryModel.subTitles.set(subTitle);
         itemCategoryModel.content.set(content);

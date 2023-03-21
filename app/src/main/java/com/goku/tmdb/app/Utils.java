@@ -505,7 +505,7 @@ public class Utils {
                 if (episode != null) {
                     ItemMediaModel mediaModel = new ItemMediaModel();
                     mediaModel.setItemType(PageParams.ITEM_TYPE_EPISODES);
-                    mediaModel.titles.set(episode.getEpisodeNumber() + "." + episode.getName());
+                    mediaModel.titles.set(episode.getName());
                     if (!TextUtils.isEmpty(episode.getStillPath())) {
                         mediaModel.images.set(Utils.appendUrl(episode.getStillPath(),
                                 getApplictionContext().getConfiguration().getImages().getStillSizes(),

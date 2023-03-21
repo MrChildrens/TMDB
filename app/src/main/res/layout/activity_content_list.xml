@@ -70,6 +70,7 @@
                         android:layout_marginEnd="@dimen/common_margin"
                         android:background="@{viewModel.isDark ? @drawable/ic_filter_night : @drawable/ic_filter_black}"
                         android:onClickListener="@{viewModel.onFilterClickListener}"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/iv_switch_grid"
                         app:layout_constraintTop_toTopOf="parent" />

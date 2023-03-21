@@ -50,6 +50,7 @@ public class ContentPageActivity extends BaseActivity<ActivityContentPageBinding
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(mViewModel.dominantColor.get());
         initData();
         initView();
         initAdapter();

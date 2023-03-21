@@ -28,6 +28,7 @@ import com.goku.tmdb.databinding.ItemCategoryVerticalTextBinding;
 import com.goku.tmdb.ui.ContentListActivity;
 import com.goku.tmdb.ui.ContentListAdapter;
 import com.goku.tmdb.ui.ImagePageActivity;
+import com.goku.tmdb.ui.detail.DetailActivity;
 import com.goku.tmdb.ui.view.HorizontalRecyclerView;
 
 import java.util.ArrayList;
@@ -181,7 +182,6 @@ public class CategoryAdapter extends RecyclerView.Adapter {
                             categoryModel.itemDatas.get().clear();
                             finalViewHolder.mAdapter.getDatas().clear();
                             finalViewHolder.mAdapter.notifyDataSetChanged();
-//                            finalViewHolder.mAdapter.setDatas(categoryModel.itemDatas.get());
                             Log.d(TAG, "[Ciel_Debug] onChanged: changeDayOrWeek: " + model.itemDatas.get().size());
                             if (categoryModel.itemDatas.get() != null && categoryModel.itemDatas.get().size() == 0) {
                                 categoryModel.setPage(1);
@@ -248,6 +248,14 @@ public class CategoryAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         ContentListActivity.newInstance(mContext, model, PageParams.CATEGORY_TYPE_COLLECTIONS);
+                    }
+                });
+                break;
+            case PageParams.CATEGORY_TYPE_EPISODE:
+                categoryEpisodeHolder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DetailActivity.newInstance(mContext, model);
                     }
                 });
                 break;

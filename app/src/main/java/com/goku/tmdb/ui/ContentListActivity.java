@@ -62,6 +62,8 @@ public class ContentListActivity extends BaseActivity<ActivityContentListBinding
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(mViewModel.dominantColor.get());
+
         ItemMediaModel mediaModel = null;
         int categoryType = 0;
         String title = "";

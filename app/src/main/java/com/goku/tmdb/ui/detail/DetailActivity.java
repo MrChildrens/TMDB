@@ -35,6 +35,7 @@ import com.goku.tmdb.base.BaseActivity;
 import com.goku.tmdb.data.AppViewModelFactory;
 import com.goku.tmdb.data.Injection;
 import com.goku.tmdb.databinding.ActivityDetailBinding;
+import com.goku.tmdb.ui.home.ItemCategoryModel;
 import com.goku.tmdb.ui.home.ItemMediaModel;
 import com.goku.tmdb.ui.view.RatingDialog;
 import com.goku.tmdb.ui.view.RatingViewModel;
@@ -60,6 +61,7 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
     private ViewPager mViewPager;
     private DetailFragmentPageAdapter mPageAdapter;
     private MagicIndicator mMagicIndicator;
+    private CommonNavigator mCommonNavigator;
     private float mAppbarAphla = 0;
 
     public static void newInstance(Context context, ItemMediaModel model) {
@@ -74,6 +76,16 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
         if (mediaModels != null) {
             bundle.putSerializable(Constant.KEY_ITEM_MODELS, (Serializable) mediaModels);
         }
+        intent.putExtras(bundle);
+        intent.setClass(context, DetailActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void newInstance(Context context, ItemCategoryModel categoryModel) {
+        Intent intent = new Intent();
+        ((Activity) context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constant.KEY_CATEGORY_MODEL, categoryModel);
         intent.putExtras(bundle);
         intent.setClass(context, DetailActivity.class);
         context.startActivity(intent);
@@ -97,12 +109,14 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
     private void initData() {
         List<ItemMediaModel> mediaModels = null;
         ItemMediaModel mediaModel = null;
+        ItemCategoryModel categoryModel = null;
         Intent intent = getIntent();
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 mediaModel = (ItemMediaModel) bundle.getSerializable(Constant.KEY_ITEM_MODEL);
                 mediaModels = (List<ItemMediaModel>) bundle.getSerializable(Constant.KEY_ITEM_MODELS);
+                categoryModel = (ItemCategoryModel) bundle.getSerializable(Constant.KEY_CATEGORY_MODEL);
             }
         }
         if (mediaModel != null) {
@@ -123,6 +137,16 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
         }
         if (mediaModels != null) {
             mViewModel.setMediaModels(mediaModels);
+        }
+        if (categoryModel != null) {
+            ItemCategoryModel itemCategoryModel = new ItemCategoryModel();
+            itemCategoryModel.setCategoryType(categoryModel.getCategoryType());
+            itemCategoryModel.setTvId(categoryModel.getTvId());
+            itemCategoryModel.setTvTitle(categoryModel.getTvTitle());
+            itemCategoryModel.setSeasonNumber(categoryModel.getSeasonNumber());
+            itemCategoryModel.setEpisodeNumber(categoryModel.getEpisodeNumber());
+            itemCategoryModel.setBackdropPath(categoryModel.getBackdropPath());
+            mViewModel.setItemCategoryModel(itemCategoryModel);
         }
     }
 
@@ -151,7 +175,6 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                                         initView();
                                         return;
                                     }
-
 
                                     mViewModel.dominantColor.set(palette.getDominantColor(Color.WHITE));
 
@@ -190,11 +213,30 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                                     mViewModel.dominantColor.set(mostPopularSwatch.getRgb());
 //                                    mViewModel.bodyTextColor.set(mostPopularSwatch.getBodyTextColor());
                                     mViewModel.titleTextColor.set(mostPopularSwatch.getTitleTextColor());
+                                    if (mPageAdapter != null && mCommonNavigator != null) {
+                                        LinePagerIndicator indicator = (LinePagerIndicator) mCommonNavigator.getPagerIndicator();
+                                        indicator.setColors(mViewModel.titleTextColor.get());
+                                        indicator.getPaint().setColor(mViewModel.titleTextColor.get());
+                                        indicator.invalidate();
+                                        for (int i = 0; i < mPageAdapter.getCount(); i++) {
+                                            SimplePagerTitleView simplePagerTitleView = (SimplePagerTitleView) mCommonNavigator.getTitleContainer().getChildAt(i);
+                                            simplePagerTitleView.setSelectedColor(mViewModel.titleTextColor.get());
+                                            simplePagerTitleView.setNormalColor(mViewModel.bodyTextColor.get());
+                                            if (i != mViewPager.getCurrentItem()) {
+                                                simplePagerTitleView.setTextColor(mViewModel.bodyTextColor.get());
+                                            } else {
+                                                mCommonNavigator.onPageSelected(i);
+                                                simplePagerTitleView.setTextColor(mViewModel.titleTextColor.get());
+                                            }
+                                        }
+                                    }
+
                                     if (drawable != null) {
                                         drawable.setBounds(0, 0, getResources().getDimensionPixelOffset(R.dimen.button_drawable_width),
                                                 getResources().getDimensionPixelOffset(R.dimen.button_drawable_width));
                                         mViewBinding.layoutMediaTop.tvVoteCount.setCompoundDrawablesRelative(drawable, null, null, null);
                                     }
+
                                     window.setStatusBarColor(mViewModel.dominantColor.get());
 
                                     mViewBinding.toolbar.setBackgroundColor(mViewModel.dominantColor.get());
@@ -202,6 +244,7 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                                     if (needInitView) {
                                         initView();
                                     }
+                                    mViewBinding.setViewModel(mViewModel);
                                 }
                             });
                         }
@@ -219,7 +262,7 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
     }
 
     private void initView() {
-        mViewModel.statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
+
         mViewBinding.toolbar.setBackgroundColor(mViewModel.dominantColor.get());
 
         setSupportActionBar(mViewBinding.toolbar);
@@ -229,12 +272,35 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                 finish();
             }
         });
-
         initRatingDialog();
-        initAppbarLayout();
-        initAdapter();
-        initViewPager();
-        initMagicIndicator();
+        if (mViewModel.getItemCategoryModel() != null
+                && mViewModel.getItemCategoryModel().getCategoryType() == PageParams.CATEGORY_TYPE_EPISODE) {
+            mViewModel.getContents(mViewModel.getItemCategoryModel());
+            mViewModel.getItemCategoryModel().refreshCategory.observe(this, new Observer<ItemCategoryModel>() {
+                @Override
+                public void onChanged(ItemCategoryModel categoryModel) {
+                    mViewModel.setMediaModels(categoryModel.itemDatas.get());
+                    for (int i = 0; i < categoryModel.itemDatas.get().size(); i++) {
+                        Log.d(TAG, "[Ciel_Debug] onChanged: " + categoryModel.itemDatas.get().get(i).getEpisodeNumber() + ',' + mViewModel.getItemCategoryModel().getEpisodeNumber());
+                        if (categoryModel.itemDatas.get().get(i).getEpisodeNumber() == mViewModel.getItemCategoryModel().getEpisodeNumber()) {
+                            mViewModel.initEpisodeDetail(categoryModel.itemDatas.get().get(i));
+                            break;
+                        }
+                    }
+                    mViewModel.statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
+                    initAppbarLayout();
+                    initAdapter();
+                    initViewPager();
+                    initMagicIndicator();
+                }
+            });
+        } else {
+            mViewModel.statusModel.dataStatus.set(Constant.DATA_STATUS_COMPLETE);
+            initAppbarLayout();
+            initAdapter();
+            initViewPager();
+            initMagicIndicator();
+        }
     }
 
     private void initRatingDialog() {
@@ -287,6 +353,7 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                 mMagicIndicator = mViewBinding.layoutMediaTop.indicatorMovieDetail;
                 break;
             case PageParams.ITEM_TYPE_EPISODES:
+                mViewBinding.layoutEpisodeTop.getRoot().setVisibility(View.VISIBLE);
                 mViewModel.isHideVote.set(true);
                 mMagicIndicator = mViewBinding.layoutEpisodeTop.indicatorMovieDetail;
                 break;
@@ -455,8 +522,8 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
         int normalColor = mViewModel.bodyTextColor.get();
         int selectedColor = mViewModel.titleTextColor.get();
 //        int selectedColor = getResources().getColor(R.color.tmdb_secondary_color);
-        CommonNavigator commonNavigator = new CommonNavigator(this);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+        mCommonNavigator = new CommonNavigator(this);
+        mCommonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
                 return mPageAdapter != null ? mPageAdapter.getCategorys().size() : 0;
@@ -467,8 +534,8 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setTextAppearance(DetailActivity.this, R.style.sub_title_style);
                 simplePagerTitleView.setText(mPageAdapter.getCategorys().get(index));
-                simplePagerTitleView.setNormalColor(normalColor);
-                simplePagerTitleView.setSelectedColor(selectedColor);
+                simplePagerTitleView.setNormalColor(mViewModel.bodyTextColor.get());
+                simplePagerTitleView.setSelectedColor(mViewModel.titleTextColor.get());
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -483,11 +550,11 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding, DetailVi
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setColors(selectedColor);
+                indicator.setColors(mViewModel.titleTextColor.get());
                 return indicator;
             }
         });
-        mMagicIndicator.setNavigator(commonNavigator);
+        mMagicIndicator.setNavigator(mCommonNavigator);
         if (mViewPager != null) {
             ViewPagerHelper.bind(mMagicIndicator, mViewPager);
         }

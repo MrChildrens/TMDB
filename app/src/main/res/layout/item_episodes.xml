@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -39,12 +39,12 @@
             android:layout_marginStart="@dimen/common_margin"
             android:layout_marginEnd="@dimen/common_margin"
             android:text="@{viewModel.titles}"
-            android:textColor="@{(int)viewModel.titleTextColor}"
+            android:textColor="@{(int)viewModel.bodyTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.titles) ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/tv_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_cover"
-            app:layout_constraintTop_toTopOf="@id/iv_cover"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="@id/iv_cover" />
 
         <TextView
             android:id="@+id/tv_content"
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.content}"
-            android:textColor="@{(int)viewModel.bodyTextColor}"
+            android:textColor="@{(int)viewModel.titleTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.content) ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/iv_cover"
             app:layout_constraintStart_toStartOf="@id/tv_subtitle"

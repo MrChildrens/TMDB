@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -40,7 +40,7 @@
             android:layout_marginStart="@dimen/common_margin"
             android:maxLines="1"
             android:text="@{viewModel.titles}"
-            android:textColor="@{(int)viewModel.titleTextColor}"
+            android:textColor="@{(int)viewModel.bodyTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.titles) ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/tv_air_date"
             app:layout_constraintStart_toEndOf="@id/iv_cover"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@{viewModel.airDate}"
-            android:textColor="@{(int)viewModel.bodyTextColor}"
+            android:textColor="@{(int)viewModel.titleTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.airDate) ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/tv_episode_count"
             app:layout_constraintStart_toStartOf="@id/tv_title"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@{viewModel.episodeCount.toString() + @string/episode}"
-            android:textColor="@{(int)viewModel.bodyTextColor}"
+            android:textColor="@{(int)viewModel.titleTextColor}"
             android:visibility="@{TextUtils.isEmpty(viewModel.episodeCounts.toString()) ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_title"

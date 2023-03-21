@@ -68,6 +68,8 @@ public class Constant {
     public static final String KEY_ACCOUNT = "account";
     public static final String KEY_ACCOUNT_ID = "account_id";
     public static final String KEY_CONFIG_IMAGES = "config_images";
+    public static final String KEY_SEASON_NUMBER = "seasonNumber";
+    public static final String KEY_EPISODE_NUMBER = "episodeNumber";
 
     public static final int DATA_STATUS_LOADING = 0;
     public static final int DATA_STATUS_COMPLETE = 1;

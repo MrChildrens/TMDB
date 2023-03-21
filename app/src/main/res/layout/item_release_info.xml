@@ -26,18 +26,18 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/button_padding"
             android:text="@{viewModel.titles}"
-            android:textColor="@{viewModel.titleTextColor}"
+            android:textColor="@{viewModel.bodyTextColor}"
             app:layout_constraintBottom_toTopOf="@id/tv_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_date"
-            style="@style/small_title_style"
+            style="@style/content_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.subTitles}"
-            android:textColor="@{viewModel.bodyTextColor}"
+            android:textColor="@{viewModel.titleTextColor}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_release_type"
             app:layout_constraintTop_toBottomOf="@id/tv_release_type" />

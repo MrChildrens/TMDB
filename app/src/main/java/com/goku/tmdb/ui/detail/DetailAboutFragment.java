@@ -113,11 +113,11 @@ public class DetailAboutFragment extends BaseFragment<FragmentDetailAboutBinding
     private void updateParentActivityModel() {
         DetailViewModel detailViewModel = new ViewModelProvider(getActivity(),
                 AppViewModelFactory.getInstance(TmdbApplication.getInstance())).get(DetailViewModel.class);
+        detailViewModel.smallTitles.set(mViewModel.smallTitles.get());
         if (mViewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_MOIVE
                 || mViewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_TV_SHOW
                 || mViewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_MOIVE_HORI
                 || mViewModel.getItemMediaModel().getItemType() == PageParams.ITEM_TYPE_TV_SHOW_HORI) {
-            detailViewModel.smallTitles.set(mViewModel.smallTitles.get());
             detailViewModel.isFav.set(mViewModel.isFav.get());
             detailViewModel.isBookmark.set(mViewModel.isBookmark.get());
             detailViewModel.isRating.set(mViewModel.isRating.get());

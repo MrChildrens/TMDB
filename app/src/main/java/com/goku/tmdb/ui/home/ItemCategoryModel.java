@@ -65,6 +65,7 @@ public class ItemCategoryModel implements Serializable {
     private String mBackdropPath;
     private int mEpisodeCount = 1;
     private int mSeasonNumber = 1;
+    private int mEpisodeNumber;
 
     private String mSearchQuery;
 
@@ -162,6 +163,14 @@ public class ItemCategoryModel implements Serializable {
 
     public void setSeasonNumber(int seasonNumber) {
         mSeasonNumber = seasonNumber;
+    }
+
+    public int getEpisodeNumber() {
+        return mEpisodeNumber;
+    }
+
+    public void setEpisodeNumber(int episodeNumber) {
+        mEpisodeNumber = episodeNumber;
     }
 
     public String getSearchQuery() {

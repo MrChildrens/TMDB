@@ -35,6 +35,7 @@ public class SelectLanguageActivity extends BaseActivity<ActivitySelectLanguageB
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(mViewModel.dominantColor.get());
         mRecyclerSelectLanguae = mViewBinding.recyclerviewSelectLangugae;
         mRecyclerSelectLanguae.setLayoutManager(new LinearLayoutManager(this));
 
